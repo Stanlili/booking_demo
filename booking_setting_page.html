@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- datatables first ,then jquery,then bootstrap,then, custom -->
+    <!-- jquery css -->
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.css" />
+    <link rel="stylesheet" href="node_modules/jq.schedule/dist/css/style.css" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- tag input -->
+    <link
+      href="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>訂位設定</title>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <!-- sidebar 左側按鈕 -->
+      <div class="sidebar bg-grey1 p-3">
+        <div class="d-flex flex-column h-100">
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_TimeLine.svg" class="mx-auto mb-1" />
+            <a href="./timeline_page.html" class="stretched-link">時間軸</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_BusinessSetting.svg" class="mx-auto mb-1" />
+            <a href="./business_setting_page.html" class="stretched-link">營業設定</a>
+          </div>
+          <div class="side-ic text-center ic-secondary-color">
+            <img src="./img/Icon_ReservationSetting.svg" class="mx-auto mb-1" />
+            <a href="./booking_setting_page.html" class="stretched-link">訂位設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AccountManagement.svg" class="mx-auto mb-1" />
+            <a href="./account_manage_page.html" class="stretched-link">帳號設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_CustomerService.svg" class="mx-auto mb-1" />
+            <a href="./customer service_page.html" class="stretched-link">客服資訊</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AdministratorSetting.svg" class="mx-auto mb-1" />
+            <a href="./admin_manage_page.html" class="stretched-link">系統管理員設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color mt-auto mb-1">
+            <img src="./img/Icon_Logout.svg" class="mx-auto" />
+            <a href="#" class="stretched-link">登出</a>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar -->
+      <!-- tab btn -->
+      <div class="tab-wrapper tab-btn w-100 h-48px bg-grey2 top-0">
+        <div
+          class="nav nav-pills d-flex flex-nowrap overflow-auto h-100"
+          id="pills-tab"
+          role="tablist"
+        >
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg active"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              >訂位規則</a
+            >
+          </div>
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              >訂位網頁設定</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /#tab btn-->
+      <!-- content-wrapper -->
+      <div class="content-wrapper overflow-hidden">
+        <!-- tab content -->
+        <div class="tab-content cal-mt">
+          <!-- 訂位規則 tab-->
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" tabindex="0">
+            <!-- date/function control 功能控制列-->
+            <div class="d-flex flex-row-reverse date-func-control color-grey1 p-2" id="menu-navi">
+              <button type="button" class="btn btn-outline-secondary me-1 color-grey1">
+                修改取消
+              </button>
+              <button type="button" class="btn btn-outline-secondary me-1 color-main">儲存</button>
+            </div>
+            <!-- /#date/function control -->
+            <!-- content-body 訂位規則內容-->
+            <div class="content-body">
+              <div class="container-fluid pt-2">
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label"
+                    >每30分鐘最多的訂位人數 (大人＋小孩)</label
+                  >
+                  <div class="col-auto ps-0">
+                    <input type="number" class="form-control" placeholder="人數" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">最晚可預約天數(預設)</label>
+                  <div class="col-auto ps-0">
+                    <input type="number" class="form-control" placeholder="天數" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">最早可預約天數(預設)</label>
+                  <div class="col-auto ps-0">
+                    <input type="number" class="form-control" placeholder="天數" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">單組訂位，最大訂位人數</label>
+                  <div class="col-auto ps-0">
+                    <input type="number" class="form-control" placeholder="人數" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="phoneCheck"
+                        checked
+                      />
+                      <label class="form-check-label" for="phoneCheck"
+                        >超過訂位上限，顯示電話提示</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">預約時間間格設定</label>
+                  <div class="col ps-0">
+                    <div class="form-check my-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault1"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault1"
+                        >餐期開始每15分鐘
+                      </label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault2"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault2"
+                        >餐期開始每30分鐘</label
+                      >
+                    </div>
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault3"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault3"
+                        >餐期開始每1小時</label
+                      >
+                    </div>
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault4"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault4"
+                        >餐期開始每1.5小時</label
+                      >
+                    </div>
+                    <div class="form-check mb-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id="flexRadioDefault5"
+                      />
+                      <label class="form-check-label" for="flexRadioDefault5"
+                        >餐期開始每2小時</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="statusCheckChecked"
+                        checked
+                      />
+                      <label class="form-check-label" for="statusCheckChecked">自動安排訂位</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="pointCheck1"
+                        checked
+                      />
+                      <label class="form-check-label" for="pointCheck1"
+                        >簡訊點數不足通知-不足50點</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="pointCheck2"
+                        checked
+                      />
+                      <label class="form-check-label" for="pointCheck2"
+                        >簡訊點數不足通知-不足100點</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">座位喜好(預設)</label>
+                  <div class="col ps-0">
+                    <input
+                      type="text"
+                      class="form-control"
+                      data-role="tagsinput"
+                      placeholder="請輸入喜好"
+                      value="靠窗,靠走道,沙發區"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">食物喜好(預設)</label>
+                  <div class="col ps-0">
+                    <input
+                      type="text"
+                      class="form-control"
+                      data-role="tagsinput"
+                      placeholder="請輸入喜好"
+                      value="辣,大辣,酸"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">特殊身分(預設)</label>
+                  <div class="col ps-0">
+                    <input
+                      type="text"
+                      class="form-control"
+                      data-role="tagsinput"
+                      placeholder="請輸入身分"
+                      value="總統,VIP,老闆朋友"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /#content-body-->
+          </div>
+          <!-- /#訂位規則 tab-->
+          <!-- 訂位網頁設定 tab-->
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" tabindex="0">
+            <!-- date/function control 功能控制列-->
+            <div class="d-flex flex-row-reverse date-func-control color-grey1 p-2" id="menu-navi">
+              <button type="button" class="btn btn-outline-secondary me-1 color-grey1">
+                修改取消
+              </button>
+              <button type="button" class="btn btn-outline-secondary me-1 color-main">儲存</button>
+              <button type="button" class="btn btn-outline-secondary me-1 color-grey1">
+                網頁瀏覽
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-1 color-grey1"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                QRcode
+              </button>
+              <button type="button" class="btn btn-outline-secondary me-1 color-grey1">
+                網址複製
+              </button>
+            </div>
+            <!-- /#date/function control -->
+            <!-- content-body 訂位規則內容-->
+            <div class="content-body">
+              <div class="container-fluid pt-2">
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">*餐廳名稱</label>
+                  <div class="col-auto ps-0">
+                    <input type="text" class="form-control color-main" value="我是餐廳名稱" />
+                  </div>
+                </div>
+                <div class="row mb-3 d-flex align-items-sm-end justify-content-sm-between">
+                  <label class="col-2 col-md-auto col-form-label">Logo圖片</label>
+                  <div class="col">
+                    <div class="input-group">
+                      <input class="form-control" id="formFile" />
+                      <label class="btn btn-grey2 color-white">
+                        <input class="d-none" type="submit" />上傳檔案
+                      </label>
+                      <label class="btn btn-grey2 color-white">
+                        <input class="d-none" type="file" />瀏覽
+                      </label>
+                      <button class="btn btn-grey2 color-white" type="button" id="cleanBtn">
+                        <img src="./img/Icon_Delete.svg" class="w-15px ic-white-color" />
+                      </button>
+                      <label for="formFile" class="form-label"></label>
+                    </div>
+                  </div>
+                  <div class="col me-2 mb-2 mb-sm-0">
+                    <div class="d-flex justify-content-center align-items-center upload-logo">
+                      <img
+                        src="img/200x200.png"
+                        class="img-fluid mx-auto d-block h-100"
+                        alt="logo"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">電話</label>
+                  <div class="col-auto ps-0">
+                    <input type="text" class="form-control" placeholder="請輸入電話" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">簡訊點數</label>
+                  <div class="col-auto ps-0">
+                    <label class="col-2 col-md-auto col-form-label">目前剩餘儲值金額</label>
+                    <label class="col-2 col-md-auto color-main">9999</label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">網址</label>
+                  <div class="col-8 ps-0">
+                    <input type="text" class="form-control" placeholder="請輸入網址" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">地址</label>
+                  <div class="col-8 ps-0">
+                    <input type="text" class="form-control" placeholder="請輸入地址" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="row">
+                    <label class="col-2 col-md-auto col-form-label">營業時間</label>
+                    <div class="col-2 ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">時</option>
+                        <option value="2">11</option>
+                        <option value="3">12</option>
+                      </select>
+                    </div>
+                    <label class="col-auto col-form-label p-0 lh-lg">：</label>
+                    <div class="col-2 ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">分</option>
+                        <option value="2">0</option>
+                        <option value="3">30</option>
+                      </select>
+                    </div>
+                    <label class="col-auto col-form-label p-0 lh-lg">—</label>
+                    <div class="col-2 ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">時</option>
+                        <option value="2">11</option>
+                        <option value="3">12</option>
+                      </select>
+                    </div>
+                    <label class="col-auto col-form-label p-0 lh-lg">：</label>
+                    <div class="col-2 ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">分</option>
+                        <option value="2">0</option>
+                        <option value="3">30</option>
+                      </select>
+                    </div>
+                    <button type="button" class="col-auto btn no-border bg-none edit-ic">
+                      <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                    </button>
+                  </div>
+                  <div class="row">
+                    <label class="col-2 col-md-auto col-form-label">&emsp;&emsp;&emsp;&emsp;</label>
+                    <div class="col d-flex flex-wrap p-0">
+                      <input type="checkbox" class="btn-check" id="check-1" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-1"
+                        >週日</label
+                      >
+
+                      <input type="checkbox" class="btn-check" id="check-2" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-2"
+                        >週一</label
+                      >
+
+                      <input type="checkbox" class="btn-check" id="check-3" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-3"
+                        >週二</label
+                      >
+
+                      <input type="checkbox" class="btn-check" id="check-4" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-4"
+                        >週三</label
+                      >
+                      <input type="checkbox" class="btn-check" id="check-5" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-5"
+                        >週四</label
+                      >
+                      <input type="checkbox" class="btn-check" id="check-6" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-6"
+                        >週五</label
+                      >
+                      <input type="checkbox" class="btn-check" id="check-7" />
+                      <label class="btn btn-lg btn-outline-secondary m-1 pick-day-btn" for="check-7"
+                        >週六</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">訂位注意事項</label>
+                  <div class="col-8 ps-0">
+                    <textarea class="form-control h-100px" placeholder="請輸入內容"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="statusCheckChecked1"
+                        checked
+                      />
+                      <label class="form-check-label" for="statusCheckChecked1"
+                        >顯示兒童椅選項</label
+                      >
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="statusCheckChecked2"
+                        checked
+                      />
+                      <label class="form-check-label" for="statusCheckChecked2"
+                        >顯示兒童餐具選項</label
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3 lh-lg">
+                  <div class="col-auto pe-0">
+                    <div class="form-check pe-0">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        id="statusCheckChecked1"
+                        checked
+                      />
+                      <label class="form-check-label" for="statusCheckChecked1">顯示訂金金額</label>
+                    </div>
+                  </div>
+                  <div class="col-2 p-0">
+                    <div class="form-check p-0">
+                      <input type="number" class="form-control" placeholder="元" />
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">ATM 匯款資訊</label>
+                  <div class="col-8 ps-0">
+                    <textarea class="form-control h-100px" placeholder="請輸入內容"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">匯款天數</label>
+                  <div class="col-auto ps-0">
+                    <input type="text" class="form-control" placeholder="請輸入天數" />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">設施說明</label>
+                  <div class="col-8 ps-0">
+                    <textarea class="form-control h-100px" placeholder="請輸入內容"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">菜單、行銷資訊</label>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <select class="form-select me-2 mxw-100px" required="">
+                        <option value="" selected="" disabled="" hidden="">排序</option>
+                        <option value="1">1.</option>
+                        <option value="2">2.</option>
+                      </select>
+                      <input class="form-control" id="formFile" />
+                      <label class="btn btn-grey2 color-white">
+                        <input class="d-none" type="submit" />上傳檔案
+                      </label>
+                      <label class="btn btn-grey2 color-white">
+                        <input class="d-none" type="file" />瀏覽
+                      </label>
+                      <button class="btn btn-grey2 color-white" type="button" id="cleanBtn">
+                        <img src="./img/Icon_Delete.svg" class="w-15px ic-white-color" />
+                      </button>
+                      <label for="formFile" class="form-label"></label>
+                    </div>
+                  </div>
+                  <button type="button" class="col-auto btn no-border bg-none edit-ic">
+                    <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                  </button>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-2 col-md-auto col-form-label">菜單、行銷資訊</label>
+                  <div class="col-8">
+                    <div class="input-group">
+                      <select class="form-select me-2 mxw-100px" required="">
+                        <option value="" selected="" disabled="" hidden="">排序</option>
+                        <option value="1">1.</option>
+                        <option value="2">2.</option>
+                      </select>
+                      <input class="form-control" id="formFile" />
+                      <label class="btn btn-grey2 color-white">
+                        <input class="d-none" type="submit" />上傳檔案
+                      </label>
+                      <label class="btn btn-grey2 color-white">
+                        <input class="d-none" type="file" />瀏覽
+                      </label>
+                      <button class="btn btn-grey2 color-white" type="button" id="cleanBtn">
+                        <img src="./img/Icon_Delete.svg" class="w-15px ic-white-color" />
+                      </button>
+                      <label for="formFile" class="form-label"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /#content-body-->
+          </div>
+          <!-- /#訂位網頁設定 tab -->
+        </div>
+        <!-- /#tab content -->
+      </div>
+      <!-- /#content-wrapper -->
+    </div>
+
+    <!-- ------------------------------以下為modal----------------------------------- -->
+    <!-- 網頁QRcodemodal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">網頁QRcode</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/QRcode.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">另存圖片</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#網頁QRcodemodal -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <!-- Bootstrap  -->
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- tag input 喜好設定input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+    <script src="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
+  </body>
+</html>

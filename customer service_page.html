@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- datatables first ,then jquery,then bootstrap,then, custom -->
+    <!-- jquery css -->
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.css" />
+    <link rel="stylesheet" href="node_modules/jq.schedule/dist/css/style.css" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>客服資訊</title>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <!-- sidebar 左側按鈕 -->
+      <div class="sidebar bg-grey1 p-3">
+        <div class="d-flex flex-column h-100">
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_TimeLine.svg" class="mx-auto mb-1" />
+            <a href="./timeline_page.html" class="stretched-link">時間軸</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_BusinessSetting.svg" class="mx-auto mb-1" />
+            <a href="./business_setting_page.html" class="stretched-link">營業設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_ReservationSetting.svg" class="mx-auto mb-1" />
+            <a href="./booking_setting_page.html" class="stretched-link">訂位設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AccountManagement.svg" class="mx-auto mb-1" />
+            <a href="./account_manage_page.html" class="stretched-link">帳號設定</a>
+          </div>
+          <div class="side-ic text-center ic-secondary-color">
+            <img src="./img/Icon_CustomerService.svg" class="mx-auto mb-1" />
+            <a href="./customer service_page.html" class="stretched-link">客服資訊</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AdministratorSetting.svg" class="mx-auto mb-1" />
+            <a href="./admin_manage_page.html" class="stretched-link">系統管理員設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color mt-auto mb-1">
+            <img src="./img/Icon_Logout.svg" class="mx-auto" />
+            <a href="#" class="stretched-link">登出</a>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar -->
+      <!-- tab btn -->
+      <div class="tab-wrapper tab-btn w-100 h-48px bg-grey2 top-0">
+        <div
+          class="nav nav-pills d-flex flex-nowrap overflow-auto h-100"
+          id="pills-tab"
+          role="tablist"
+        >
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg active"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              >客服資訊</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /#tab btn-->
+      <!-- content-wrapper -->
+      <div class="content-wrapper overflow-hidden">
+        <!-- tab content -->
+        <div class="tab-content cal-mt">
+          <!-- 客服資訊 tab-->
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" tabindex="0">
+            <!-- content-body 客服資訊-->
+            <div class="content-body">
+              <div class="container ms-0">
+                <div class="row p-3">
+                  <h4>請加入客服Line @</h4>
+                  <div class="d-flex">
+                    <img src="img/QRcode.png" class="img-fluid d-block h-100" />
+                  </div>
+                  <h4>客服服務時間</h4>
+                  <h4>周一到周日，每天am 9:00 ~ pm10:00</h4>
+                </div>
+              </div>
+            </div>
+            <!-- /#content-body-->
+          </div>
+          <!-- /#帳號清單 tab-->
+        </div>
+        <!-- /#tab content -->
+      </div>
+      <!-- /#content-wrapper -->
+    </div>
+
+    <!-- ------------------------------以下為modal----------------------------------- -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <!-- mobile touch -->
+    <script src="component/jquery-ui-touch-punch-master/jquery.ui.touch-punch.js"></script>
+    <!-- Bootstrap  -->
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>訂位紀錄頁</title>
+  </head>
+  <body>
+    <div class="desktop-width">
+      <!-- logo img -->
+      <div class="container-fluid">
+        <div class="row d-flex align-items-center py-2">
+          <div class="col-4 col-md-2">
+            <div class="d-flex logo-area">
+              <img src="img/100x100.png" class="img-fluid mx-auto d-block h-100" alt="logo" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="store-name d-inline">康青龍</div>
+            <div class="shop-name d-inline">內湖店</div>
+            <div class="store-notice-title color-grey2">用餐注意事項</div>
+            <div class="store-notice color-grey2">- 座位最多保留10分鐘</div>
+            <div class="store-notice color-grey2">- 用餐時間120分鐘限制</div>
+            <div class="store-notice color-grey2">- 用餐注意事項3</div>
+            <div class="store-notice color-grey2">- 用餐注意事項4</div>
+          </div>
+        </div>
+      </div>
+      <!-- /#logo img -->
+      <!--service title  -->
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="service-title lh-lg h-30px">訂位資訊</div>
+        </div>
+      </div>
+      <!--/#service title  -->
+      <!-- form -->
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">訂位號碼</label>
+          <div class="col d-flex align-items-center p-0">
+            <h1 class="m-0 color-main">22516</h1>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">預定日期</label>
+          <div class="col d-flex align-items-center p-0">
+            <h5 class="m-0">2022/08/08 18:30</h5>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">預定人數</label>
+          <div class="col d-flex align-items-center p-0">
+            <h5 class="m-0">6大2小</h5>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">&emsp;&emsp;備註</label>
+          <div class="col d-flex align-items-center p-0">
+            <h5 class="m-0">盡量靠窗</h5>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">匯款資訊</label>
+          <div class="col d-flex align-items-center p-0">
+            <h5 class="m-0">009 xx銀行 805625692565</h5>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">匯款金額</label>
+          <div class="col d-flex align-items-center p-0">
+            <h5 class="m-0">$500</h5>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">匯款狀態</label>
+          <div class="col d-flex align-items-center p-0">
+            <h5 class="m-0">尚未匯款</h5>
+          </div>
+        </div>
+      </div>
+      <!-- /#form -->
+      <!-- fixed button -->
+      <div class="container-fluid fixed-bottom bg-grey5">
+        <div class="row my-3">
+          <div class="d-grid gap-2 col-auto col-md-3 mx-auto">
+            <button
+              class="btn btn-lg btn-outline-secondary"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal1"
+            >
+              取消訂位
+            </button>
+          </div>
+          <div class="d-grid gap-2 col col-md-9 mx-auto">
+            <button
+              class="btn btn-lg btn-primary color-white"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal1"
+              onclick="location.href='./guest_booking_modify_page.html'"
+            >
+              修改訂位
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /#fixed button -->
+
+      <!-- modal-訂位取消 -->
+      <div
+        class="modal fade"
+        id="exampleModal1"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body color-grey2 m-5 text-center">
+              <h3>確定取消訂位？</h3>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <div class="row w-100">
+                <div class="d-grid gap-2 col">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    保留訂位
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button
+                    type="button"
+                    class="btn btn-primary color-white"
+                    onclick="location.href='./guest_booking_cancel_page.html'"
+                  >
+                    取消訂位
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#modal-訂位失敗 -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- datatables first ,then jquery,then bootstrap,then, custom -->
+    <!-- DataTables -->
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-select-bs5/css/select.bootstrap5.min.css"
+    />
+
+    <!-- toastui-calendar -->
+    <link rel="stylesheet" type="text/css" href="node_modules/tui-calendar/dist/tui-calendar.css" />
+    <!-- If you use the default popups, use this. -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="node_modules/tui-date-picker/dist/tui-date-picker.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="node_modules/tui-time-picker/dist/tui-time-picker.css"
+    />
+
+    <!-- jquery css -->
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.css" />
+    <link rel="stylesheet" href="node_modules/jq.schedule/dist/css/style.css" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- tag input -->
+    <link
+      href="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>營業設定</title>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <!-- sidebar 左側按鈕 -->
+      <div class="sidebar bg-grey1 p-3">
+        <div class="d-flex flex-column h-100">
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_TimeLine.svg" class="mx-auto mb-1" />
+            <a href="./timeline_page.html" class="stretched-link">時間軸</a>
+          </div>
+          <div class="side-ic text-center ic-secondary-color">
+            <img src="./img/Icon_BusinessSetting.svg" class="mx-auto mb-1" />
+            <a href="./business_setting_page.html" class="stretched-link">營業設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_ReservationSetting.svg" class="mx-auto mb-1" />
+            <a href="./booking_setting_page.html" class="stretched-link">訂位設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AccountManagement.svg" class="mx-auto mb-1" />
+            <a href="./account_manage_page.html" class="stretched-link">帳號設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_CustomerService.svg" class="mx-auto mb-1" />
+            <a href="./customer service_page.html" class="stretched-link">客服資訊</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AdministratorSetting.svg" class="mx-auto mb-1" />
+            <a href="./admin_manage_page.html" class="stretched-link">系統管理員設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color mt-auto mb-1">
+            <img src="./img/Icon_Logout.svg" class="mx-auto" />
+            <a href="#" class="stretched-link">登出</a>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar -->
+      <!-- tab btn -->
+      <div class="tab-wrapper tab-btn w-100 h-48px bg-grey2 top-0">
+        <div
+          class="nav nav-pills d-flex flex-nowrap overflow-auto h-100"
+          id="pills-tab"
+          role="tablist"
+        >
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg active"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              >營業日設定</a
+            >
+          </div>
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              >桌次設定</a
+            >
+          </div>
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-contact"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              >餐期設定</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /#tab btn-->
+      <!-- content-wrapper -->
+      <div class="content-wrapper overflow-hidden">
+        <!-- tab content -->
+        <div class="tab-content cal-mt">
+          <!-- 營業日設定 tab-->
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" tabindex="0">
+            <!-- date/function control 功能控制列-->
+            <div class="d-flex flex-row date-func-control color-grey1 p-2" id="menu-navi">
+              <div class="tx-rem15 me-auto lh-lg render-range" id="renderRange">2022.08</div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-1 color-grey1"
+                onclick="cal.today();"
+              >
+                今日
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-1 color-grey1 prev"
+                onclick="cal.prev();"
+              >
+                上個月
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-1 color-grey1 next"
+                onclick="cal.next();"
+              >
+                下個月
+              </button>
+            </div>
+            <!-- /#date/function control -->
+            <!-- modify-control 狀態控制列-->
+            <div class="modify-control d-flex flex-row-reverse bg-grey4 p-2">
+              <button
+                type="button"
+                class="btn no-border bg-none edit-ic"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                <img src="./img/Icon_New.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body calendar 行事曆-->
+            <div class="content-body">
+              <div class="container-fluid h-100 pt-2">
+                <div id="calendar" class="overflow-scroll calendar-h"></div>
+              </div>
+            </div>
+            <!-- /#content-body calendar-->
+          </div>
+          <!-- /#營業日設定 tab-->
+          <!-- 桌次設定 tab-->
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" tabindex="0">
+            <!-- modify-control 區域設定 狀態控制列-->
+            <div class="modify-control d-flex flex-row bg-grey4 p-2">
+              <div class="tx-rem15 me-auto ms-2">區域設定</div>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Save.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+              <button
+                type="button"
+                class="btn no-border bg-none edit-ic"
+                data-bs-toggle="modal"
+                data-bs-target="#ariaModal"
+              >
+                <img src="./img/Icon_New.svg" class="mx-auto w-18px" />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body 區域設定 datatable1-->
+            <div class="content-body mb-5">
+              <div class="container-fluid">
+                <!-- datatable -->
+                <table id="example2" class="table table-hover nowrap">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>名稱</th>
+                      <th>標籤簡稱</th>
+                      <th>建立日期</th>
+                      <th>狀態</th>
+                      <th>主畫面</th>
+                      <th>營業日預設</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>吧檯區</td>
+                      <td>吧檯</td>
+                      <td>2022/08/18</td>
+                      <td>啟用</td>
+                      <td></td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>中央區</td>
+                      <td>中央</td>
+                      <td>2022/08/18</td>
+                      <td>啟用</td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>舞台區</td>
+                      <td>戶外</td>
+                      <td>2022/08/18</td>
+                      <td>啟用</td>
+                      <td></td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>舞台區</td>
+                      <td>戶外</td>
+                      <td>2022/08/18</td>
+                      <td>啟用</td>
+                      <td></td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>舞台區</td>
+                      <td>戶外</td>
+                      <td>2022/08/18</td>
+                      <td>啟用</td>
+                      <td></td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>舞台區</td>
+                      <td>戶外</td>
+                      <td>2022/08/18</td>
+                      <td>啟用</td>
+                      <td></td>
+                      <td>
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="checkboxNoLabel"
+                          checked
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /#datatable -->
+              </div>
+            </div>
+            <!-- /#content-body datatable1-->
+            <!-- modify-control 桌次設定 狀態控制列-->
+            <div class="modify-control d-flex flex-row bg-grey4 p-2">
+              <div class="tx-rem15 me-auto ms-2">桌次設定</div>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Copy.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Save.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img
+                  src="./img/Icon_New.svg"
+                  class="mx-auto w-18px"
+                  data-bs-toggle="modal"
+                  data-bs-target="#tableModal"
+                />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body 桌次設定 datatable2-->
+            <div class="content-body">
+              <div class="container-fluid">
+                <!-- datatable -->
+                <table id="example3" class="table table-hover nowrap">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>名稱</th>
+                      <th>類型</th>
+                      <th>併桌</th>
+                      <th>保留桌</th>
+                      <th>最少人數</th>
+                      <th>最大人數</th>
+                      <th>桌次預設</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>桌1</td>
+                      <td>2人方桌</td>
+                      <td>V</td>
+                      <td>保留桌</td>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>預設</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /#datatable -->
+                <!-- footer -->
+                <div class="modify-control d-flex flex-row bg-grey4 p-2">
+                  <div class="tx-rem11 lh-lg ms-2">2人桌*20</div>
+                  <div class="tx-rem11 lh-lg ms-2">4人桌*10</div>
+                  <div class="tx-rem11 lh-lg ms-2">8人桌*4</div>
+                  <div class="tx-rem11 lh-lg ms-2">10人桌*2</div>
+                  <div class="tx-rem11 lh-lg ms-auto">每N分鐘可接受訂位最大人數總計 85</div>
+                </div>
+                <!-- footer -->
+              </div>
+            </div>
+            <!-- /#content-body datatable2-->
+          </div>
+          <!-- /#桌次設定 tab -->
+          <!-- 餐期設定 tab-->
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" tabindex="0">
+            <!-- modify-control 區域設定 狀態控制列-->
+            <div class="modify-control d-flex flex-row bg-grey4 p-2">
+              <div class="tx-rem15 me-auto ms-2">區域設定</div>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Save.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img
+                  src="./img/Icon_New.svg"
+                  class="mx-auto w-18px"
+                  data-bs-toggle="modal"
+                  data-bs-target="#mealModal"
+                />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body 區域設定 datatable3-->
+            <div class="content-body">
+              <div class="container-fluid">
+                <!-- datatable -->
+                <table id="example4" class="table table-hover nowrap">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>名稱</th>
+                      <th>標籤簡稱</th>
+                      <th>起訖</th>
+                      <th>清場</th>
+                      <th>建立日期</th>
+                      <th>狀態</th>
+                      <th>餐期預設</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>假日下午茶</td>
+                      <td>假茶</td>
+                      <td>14:00-18:00</td>
+                      <td>開始、結束</td>
+                      <td>2022/08/19</td>
+                      <td>啟用</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>平日下午茶</td>
+                      <td>平茶</td>
+                      <td>14:00-17:00</td>
+                      <td>開始、結束</td>
+                      <td>2022/08/19</td>
+                      <td>啟用</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>假日晚餐</td>
+                      <td>假晚</td>
+                      <td>18:00-21:00</td>
+                      <td></td>
+                      <td>2022/08/19</td>
+                      <td>啟用</td>
+                      <td>預設</td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>平日晚餐</td>
+                      <td>平晚</td>
+                      <td>17:00-21:00</td>
+                      <td></td>
+                      <td>2022/08/19</td>
+                      <td>啟用</td>
+                      <td>預設</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /#datatable -->
+              </div>
+            </div>
+            <!-- /#content-body datatable3-->
+          </div>
+          <!-- /#餐期設定 tab -->
+        </div>
+        <!-- /#tab content -->
+      </div>
+      <!-- /#content-wrapper -->
+    </div>
+
+    <!-- ------------------------------以下為modal----------------------------------- -->
+
+    <!-- 新增/修改營業日modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg mxw-60vw">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增/修改營業日</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckChecked"
+                      checked
+                    />
+                    <label class="form-check-label" for="flexCheckChecked">啟用狀態</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">日期</label>
+                <div class="col-auto d-flex align-items-center">
+                  <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                    <input id="startpicker-input" type="text" aria-label="Date" />
+                    <span class="tui-ico-date"></span>
+                    <div id="startpicker-container" style="margin-left: -1px"></div>
+                  </div>
+                  <span>&emsp;—&emsp;</span>
+                  <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                    <input id="endpicker-input" type="text" aria-label="Date" />
+                    <span class="tui-ico-date"></span>
+                    <div id="endpicker-container" style="margin-left: -1px"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-auto">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="flexCheckChecked2"
+                      checked
+                    />
+                    <label class="form-check-label" for="flexCheckChecked2">全天</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <select class="form-select" id="specialSelect">
+                    <option value="" selected>不重覆</option>
+                    <option value="">每天</option>
+                    <option value="">每周(日期起的星期N)</option>
+                    <option value="">每月第一個(日期起的星期N)</option>
+                    <option value="">每年 在(日期起)</option>
+                    <option value="">平日(星期一至星期五)</option>
+                    <option value="specialOption">自訂</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">營業日顯示名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入自訂名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">座位標籤</label>
+                <div class="col ps-0">
+                  <input
+                    type="text"
+                    class="form-control w-auto"
+                    data-role="tagsinput"
+                    placeholder="請輸入自訂標籤"
+                    value="座位區,吧檯區,中央區"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="col-auto btn no-border bg-none edit-ic"
+                  data-bs-toggle="modal"
+                  data-bs-target="#labelModal"
+                >
+                  <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                </button>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">餐期標籤</label>
+                <div class="col ps-0">
+                  <input
+                    type="text"
+                    class="form-control w-auto"
+                    data-role="tagsinput"
+                    placeholder="請輸入自訂標籤"
+                    value="假午,假晚"
+                  />
+                </div>
+                <button
+                  type="button"
+                  class="col-auto btn no-border bg-none edit-ic"
+                  data-bs-toggle="modal"
+                  data-bs-target="#labelModal"
+                >
+                  <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                </button>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">儲存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#新增/修改營業日modal -->
+    <!-- 標籤modal -->
+    <div
+      class="modal fade"
+      id="labelModal"
+      tabindex="-1"
+      data-bs-backdrop="static"
+      aria-labelledby="labelModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">標籤</h5>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex flex-wrap">
+              <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check">座位區</label>
+              <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check2">吧檯區</label>
+              <input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check3">中央區</label>
+              <input type="checkbox" class="btn-check" id="btn-check4" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check4">搖滾區</label>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  href="#exampleModal"
+                  role="button"
+                >
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-toggle="modal"
+                  href="#exampleModal"
+                  role="button"
+                >
+                  加入
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#標籤modal -->
+    <!-- 自訂條件modal -->
+    <div
+      class="modal fade"
+      id="specialSetModal"
+      tabindex="-1"
+      data-bs-backdrop="static"
+      aria-labelledby="specialSetModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">自訂週期</h5>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">重覆間隔</label>
+                <div class="col-2 ps-0">
+                  <input type="number" class="form-control" value="1" />
+                </div>
+                <div class="col-4 ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">天</option>
+                    <option value="2">週</option>
+                    <option value="3">個月</option>
+                    <option value="4">年</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">重覆日期</label>
+                <div class="col d-flex flex-wrap">
+                  <input type="checkbox" class="btn-check" id="check-1" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-1"
+                    >週日</label
+                  >
+
+                  <input type="checkbox" class="btn-check" id="check-2" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-2"
+                    >週一</label
+                  >
+
+                  <input type="checkbox" class="btn-check" id="check-3" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-3"
+                    >週二</label
+                  >
+
+                  <input type="checkbox" class="btn-check" id="check-4" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-4"
+                    >週三</label
+                  >
+                  <input type="checkbox" class="btn-check" id="check-5" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-5"
+                    >週四</label
+                  >
+                  <input type="checkbox" class="btn-check" id="check-6" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-6"
+                    >週五</label
+                  >
+                  <input type="checkbox" class="btn-check" id="check-7" />
+                  <label class="btn btn-lg btn-outline-primary m-1 pick-day-btn" for="check-7"
+                    >週六</label
+                  >
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">重覆日期</label>
+                <div class="col ps-0">
+                  <div class="form-check my-2">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault1"> 持續不停 </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault2">
+                      於
+                      <div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+                        <input type="text" id="datepicker-input" aria-label="Date-Time" />
+                        <span class="tui-ico-date"></span>
+                      </div>
+                      <div id="wrapper" style="margin-top: -1px"></div>
+                    </label>
+                  </div>
+                  <div class="form-check mb-2">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault3"
+                    />
+                    <label class="form-check-label" for="flexRadioDefault3">
+                      重覆<input
+                        type="number"
+                        class="form-control d-inline-block w-48px"
+                        value="1"
+                      />次
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  href="#exampleModal"
+                  role="button"
+                >
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-toggle="modal"
+                  href="#exampleModal"
+                  role="button"
+                >
+                  加入
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#自訂條件modal -->
+    <!-- 新增/修改區域modal -->
+    <div
+      class="modal fade"
+      id="ariaModal"
+      tabindex="-1"
+      aria-labelledby="ariaModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增/修改區域</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="statusCheckChecked"
+                      checked
+                    />
+                    <label class="form-check-label" for="statusCheckChecked">啟用狀態</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">區域名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入區域名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">標籤簡稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入標籤簡稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultTimelineCheck"
+                      checked
+                    />
+                    <label class="form-check-label" for="defaultTimelineCheck"
+                      >預設為時間軸主畫面</label
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="businessDayDefault"
+                      checked
+                    />
+                    <label class="form-check-label" for="businessDayDefault">營業日預設</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">儲存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#新增/修改區域modal -->
+    <!-- 新增/修改桌次modal -->
+    <div
+      class="modal fade"
+      id="tableModal"
+      tabindex="-1"
+      aria-labelledby="tableModallLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增/修改桌次</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="statusCheckChecked"
+                      checked
+                    />
+                    <label class="form-check-label" for="statusCheckChecked">啟用狀態</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">桌子名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入桌子名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">桌子類型</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected disabled hidden>請選擇類型</option>
+                    <option value="2">類型1</option>
+                    <option value="3">類型2</option>
+                    <option value="4">類型3</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">自訂類型名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入自訂類型名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">最少使用人數</label>
+                <div class="col ps-0">
+                  <input type="number" class="form-control" placeholder="人數" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">最多使用人數</label>
+                <div class="col ps-0">
+                  <input type="number" class="form-control" placeholder="人數" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="combineTable"
+                      checked
+                    />
+                    <label class="form-check-label" for="combineTable">允許併桌</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="keepTable"
+                      checked
+                    />
+                    <label class="form-check-label" for="keepTable">保留桌</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultTable"
+                      checked
+                    />
+                    <label class="form-check-label" for="defaultTable">桌次預設</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">儲存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#新增/修改桌次modal -->
+    <!-- 新增/修改餐期modal -->
+    <div
+      class="modal fade"
+      id="mealModal"
+      tabindex="-1"
+      aria-labelledby="mealModallLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增/修改餐期</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="statusCheckChecked"
+                      checked
+                    />
+                    <label class="form-check-label" for="statusCheckChecked">啟用狀態</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">餐期名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入餐期名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">標籤簡稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入標籤簡稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">餐期開始時間</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">時</option>
+                    <option value="2">11</option>
+                    <option value="3">12</option>
+                  </select>
+                </div>
+                <label class="col-auto col-form-label p-0 lh-lg">：</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">分</option>
+                    <option value="2">0</option>
+                    <option value="3">30</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">餐期結束時間</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">時</option>
+                    <option value="2">11</option>
+                    <option value="3">12</option>
+                  </select>
+                </div>
+                <label class="col-auto col-form-label p-0 lh-lg">：</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">分</option>
+                    <option value="2">0</option>
+                    <option value="3">30</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">用餐預設時間</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">分</option>
+                    <option value="2">30分</option>
+                    <option value="3">60分</option>
+                    <option value="2">90分</option>
+                    <option value="3">120分</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">最晚預約天數</label>
+                <div class="col ps-0">
+                  <input type="number" class="form-control" placeholder="天數" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">最早預約天數</label>
+                <div class="col ps-0">
+                  <input type="number" class="form-control" placeholder="天數" />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="startClean"
+                      checked
+                    />
+                    <label class="form-check-label" for="startClean">餐期開始清場</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="endClean"
+                      checked
+                    />
+                    <label class="form-check-label" for="endClean">餐期結束清場</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="defaultMeal"
+                      checked
+                    />
+                    <label class="form-check-label" for="defaultMeal">餐期預設</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">儲存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#新增/修改餐期modal -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <!-- mobile touch -->
+    <script src="component/jquery-ui-touch-punch-master/jquery.ui.touch-punch.js"></script>
+    <!-- Bootstrap  -->
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables & Plugins -->
+    <script src="node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="node_modules/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="node_modules/datatables.net-select-bs5/js/select.bootstrap5.min.js"></script>
+
+    <!-- tag input 喜好設定input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+    <script src="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
+
+    <!-- mobile touch can be drag 行動裝置拖拉支援元件-->
+    <script>
+      // $('#calendar').draggable();
+    </script>
+
+    <!-- toastui-calendar https://github.com/nhn/tui.calendar/blob/main/docs/README.md https://www.npmjs.com/package/tui-calendar#-install -->
+    <!-- 需照順序排列 -->
+    <script src="node_modules/tui-code-snippet/dist/tui-code-snippet.js"></script>
+    <script src="node_modules/tui-time-picker/dist/tui-time-picker.js"></script>
+    <script src="node_modules/tui-date-picker/dist/tui-date-picker.js"></script>
+    <script src="node_modules/tui-calendar/dist/tui-calendar.js"></script>
+    <!--toastui-calendar setting -->
+    <script type="text/javascript">
+      var MONTHLY_CUSTOM_THEME = {
+        // month header 'dayname'
+        'month.dayname.height': '42px',
+        'month.dayname.borderLeft': 'none',
+        'month.dayname.paddingLeft': '8px',
+        'month.dayname.paddingRight': '0',
+        'month.dayname.fontSize': '13px',
+        'month.dayname.backgroundColor': 'inherit',
+        'month.dayname.fontWeight': 'normal',
+        'month.dayname.textAlign': 'left',
+
+        // month day grid cell 'day'
+        'month.holidayExceptThisMonth.color': '#f3acac',
+        'month.dayExceptThisMonth.color': '#bbb',
+        'month.weekend.backgroundColor': '#fff',
+        'month.day.fontSize': '16px',
+
+        // month schedule style
+        'month.schedule.borderRadius': '0px',
+        'month.schedule.height': '20px',
+        'month.schedule.marginTop': '2px',
+        'month.schedule.marginLeft': '10px',
+        'month.schedule.marginRight': '10px',
+
+        // month more view
+        'month.moreView.boxShadow': 'none',
+        'month.moreView.paddingBottom': '0',
+        'month.moreView.border': '1px solid #ddd',
+        'month.moreView.backgroundColor': '#fff',
+        'month.moreViewTitle.height': '28px',
+        'month.moreViewTitle.marginBottom': '0',
+        'month.moreViewTitle.backgroundColor': '#f4f4f4',
+        'month.moreViewTitle.borderBottom': '1px solid #ddd',
+        'month.moreViewTitle.padding': '0 5px',
+        'month.moreViewList.padding': '5px',
+      };
+      var Calendar = tui.Calendar;
+      var cal = new Calendar('#calendar', {
+        defaultView: 'month',
+        isReadOnly: 'true',
+        taskView: true,
+        useCreationPopup: false, //true可以點開看欄位
+        useDetailPopup: true, //true可以點開看欄位
+        isFocusedL: false,
+        month: {
+          daynames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+        },
+        theme: MONTHLY_CUSTOM_THEME,
+        taskView: true,
+        template: {
+          monthGridHeader: function (model) {
+            var date = new Date(model.date);
+            var template =
+              '<span class="tui-full-calendar-weekday-grid-date ">' + date.getDate() + '</span>';
+            return template;
+          },
+        },
+      });
+
+      //公休顏色自訂
+      cal.setCalendarColor('defaultRest', {
+        color: '#3f3f3f',
+        bgColor: 'none',
+        dragBgColor: '#ccc',
+        borderColor: '#fff',
+      });
+      //預設餐期桌次顏色自訂
+      cal.setCalendarColor('defaultMeal', {
+        color: '#ccc',
+        bgColor: 'none',
+        dragBgColor: '#ccc',
+        borderColor: '#fff',
+      });
+      //非預設餐期桌次顏色自訂
+      cal.setCalendarColor('notDefaultMeal', {
+        color: '#3f3f3f',
+        bgColor: 'none',
+        dragBgColor: '#ccc',
+        borderColor: '#fff',
+      });
+      //新增事件顏色自訂
+      cal.setCalendarColor('addEvent', {
+        color: '#E15231',
+        bgColor: 'none',
+        dragBgColor: '#FFBC6C',
+        borderColor: '#fff',
+      });
+
+      //事件列表
+      cal.createSchedules([
+        {
+          id: 'addEvent',
+          calendarId: 'addEvent',
+          title: ' 周年慶',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 1),
+          end: new Date(2022, 7, 2),
+          category: 'allday',
+        },
+        {
+          id: 'addEvent',
+          calendarId: 'addEvent',
+          title: ' 全店買一送一',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 1),
+          end: new Date(2022, 7, 2),
+          category: 'allday',
+        },
+        {
+          id: 'addEvent',
+          calendarId: 'addEvent',
+          title: ' 鬼門開',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 7),
+          end: new Date(2022, 7, 8),
+          category: 'allday',
+        },
+        {
+          id: 'addEvent',
+          calendarId: 'addEvent',
+          title: ' 年中盤點',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 11),
+          end: new Date(2022, 7, 12),
+          category: 'allday',
+        },
+        {
+          id: 'addEvent',
+          calendarId: 'addEvent',
+          title: ' 促銷日',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 23),
+          end: new Date(2022, 7, 24),
+          category: 'allday',
+        },
+        {
+          id: 'addEvent',
+          calendarId: 'addEvent',
+          title: ' 股東會',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 23),
+          end: new Date(2022, 7, 24),
+          category: 'allday',
+        },
+        {
+          id: 'defaultRest',
+          calendarId: 'defaultRest',
+          title: ' 公休',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 14),
+          end: new Date(2022, 7, 15),
+          category: 'allday',
+        },
+        {
+          id: 'defaultRest',
+          calendarId: 'defaultRest',
+          title: ' 公休',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 15),
+          end: new Date(2022, 7, 16),
+          category: 'allday',
+        },
+        {
+          id: 'defaultRest',
+          calendarId: 'defaultRest',
+          title: ' 公休',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 7),
+          end: new Date(2022, 7, 8),
+          category: 'allday',
+        },
+        {
+          id: 'defaultRest',
+          calendarId: 'defaultRest',
+          title: ' 公休',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 21),
+          end: new Date(2022, 7, 22),
+          category: 'allday',
+        },
+        {
+          id: 'defaultRest',
+          calendarId: 'defaultRest',
+          title: ' 公休',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 28),
+          end: new Date(2022, 7, 29),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 1),
+          end: new Date(2022, 7, 2),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 2),
+          end: new Date(2022, 7, 3),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 3),
+          end: new Date(2022, 7, 4),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 4),
+          end: new Date(2022, 7, 5),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 5),
+          end: new Date(2022, 7, 6),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 早餐/午餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 6),
+          end: new Date(2022, 7, 7),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 8),
+          end: new Date(2022, 7, 9),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 9),
+          end: new Date(2022, 7, 10),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 10),
+          end: new Date(2022, 7, 11),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 11),
+          end: new Date(2022, 7, 12),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 12),
+          end: new Date(2022, 7, 13),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 早餐/午餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 13),
+          end: new Date(2022, 7, 14),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 16),
+          end: new Date(2022, 7, 17),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 17),
+          end: new Date(2022, 7, 18),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 18),
+          end: new Date(2022, 7, 19),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 19),
+          end: new Date(2022, 7, 20),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 早餐/午餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 20),
+          end: new Date(2022, 7, 21),
+          category: 'allday',
+        },
+
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 22),
+          end: new Date(2022, 7, 23),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 23),
+          end: new Date(2022, 7, 24),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 24),
+          end: new Date(2022, 7, 25),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 25),
+          end: new Date(2022, 7, 26),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 26),
+          end: new Date(2022, 7, 27),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 早餐/午餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 27),
+          end: new Date(2022, 7, 28),
+          category: 'allday',
+        },
+
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 29),
+          end: new Date(2022, 7, 30),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 30),
+          end: new Date(2022, 7, 31),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 早餐/午餐/晚餐',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 31),
+          end: new Date(2022, 8, 1),
+          category: 'allday',
+        },
+        //------------------------------------------------------------------------------------
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 1),
+          end: new Date(2022, 7, 2),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 2),
+          end: new Date(2022, 7, 3),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 3),
+          end: new Date(2022, 7, 4),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 4),
+          end: new Date(2022, 7, 5),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 5),
+          end: new Date(2022, 7, 6),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 6),
+          end: new Date(2022, 7, 7),
+          category: 'allday',
+        },
+
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 8),
+          end: new Date(2022, 7, 9),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 9),
+          end: new Date(2022, 7, 10),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 10),
+          end: new Date(2022, 7, 11),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 11),
+          end: new Date(2022, 7, 12),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 12),
+          end: new Date(2022, 7, 13),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 13),
+          end: new Date(2022, 7, 14),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 16),
+          end: new Date(2022, 7, 17),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 17),
+          end: new Date(2022, 7, 18),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 18),
+          end: new Date(2022, 7, 19),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 19),
+          end: new Date(2022, 7, 20),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 20),
+          end: new Date(2022, 7, 21),
+          category: 'allday',
+        },
+
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 22),
+          end: new Date(2022, 7, 23),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 23),
+          end: new Date(2022, 7, 24),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 24),
+          end: new Date(2022, 7, 25),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 25),
+          end: new Date(2022, 7, 26),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 26),
+          end: new Date(2022, 7, 27),
+          category: 'allday',
+        },
+        {
+          id: 'notDefaultMeal',
+          calendarId: 'notDefaultMeal',
+          title: ' 戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 27),
+          end: new Date(2022, 7, 28),
+          category: 'allday',
+        },
+
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 29),
+          end: new Date(2022, 7, 30),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 30),
+          end: new Date(2022, 7, 31),
+          category: 'allday',
+        },
+        {
+          id: 'defaultMeal',
+          calendarId: 'defaultMeal',
+          title: ' 中央/吧檯/戶外/VIP',
+          isAllDay: false,
+          isVisible: true,
+          start: new Date(2022, 7, 31),
+          end: new Date(2022, 8, 1),
+          category: 'allday',
+        },
+        // {
+        //   id: '3',
+        //   calendarId: '3',
+        //   title: ' 新增-跨天',
+        //   isAllDay: false,
+        //   isVisible: true,
+        //   start: new Date(2022, 7, 23),
+        //   end: new Date(2022, 7, 25),
+        //   color: '#000',
+        //   bgColor: '#FFBC6C',
+        //   dragBgColor: '#FFBC6C',
+        //   borderColor: '#FFBC6C',
+        //   category: 'allday',
+        // },
+      ]);
+      cal.on({
+        clickSchedule: function (e) {
+          console.log('clickSchedule', e);
+        },
+        beforeCreateSchedule: function (e) {
+          console.log('beforeCreateSchedule', e);
+          // open a creation popup
+          e.guide.clearGuideElement(); //移除多選外框
+        },
+        beforeUpdateSchedule: function (e) {
+          console.log('beforeUpdateSchedule', e);
+          e.schedule.start = e.start;
+          e.schedule.end = e.end;
+          cal.updateSchedule(e.schedule.id, e.schedule.calendarId, e.schedule);
+        },
+        beforeDeleteSchedule: function (e) {
+          console.log('beforeDeleteSchedule', e);
+          cal.deleteSchedule(e.schedule.id, e.schedule.calendarId);
+        },
+      });
+    </script>
+
+    <!--toastui-datepicker range -->
+    <script type="text/javascript">
+      var today = new Date();
+      var picker = tui.DatePicker.createRangePicker({
+        startpicker: {
+          date: today,
+          input: '#startpicker-input',
+          container: '#startpicker-container',
+        },
+        endpicker: {
+          date: today,
+          input: '#endpicker-input',
+          container: '#endpicker-container',
+        },
+        selectableRanges: [
+          [today, new Date(today.getFullYear() + 1, today.getMonth(), today.getDate())],
+        ],
+      });
+    </script>
+    <!--toastui-datepicker  -->
+    <script type="text/javascript">
+      var datepicker = new tui.DatePicker('#wrapper', {
+        date: new Date(),
+        input: {
+          element: '#datepicker-input',
+          format: 'yyyy-MM-dd',
+        },
+      });
+    </script>
+
+    <!-- DataTables Page specific script 桌次選擇datatable-->
+    <script type="text/javascript">
+      $(function () {
+        $('#example2').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+          fixedHeader: true, //固定表頭
+          scrollY: '200px', //table高度設置，使其可scroll
+          scrollCollapse: true,
+        });
+        $('#example3').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+          fixedHeader: true, //固定表頭
+          scrollY: '30vh', //table高度設置，使其可scroll
+          scrollCollapse: true,
+        });
+        $('#example4').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+          fixedHeader: true, //固定表頭
+          scrollY: '80vh', //table高度設置，使其可scroll
+          scrollCollapse: true,
+        });
+        //table至於bootstrap的tab裡(toggle類型為pill)，需刷新datatable產生的表格寬度，否則表頭寬度會無法對齊
+        $('a[data-bs-toggle="pill"]').on('shown.bs.tab', function (e) {
+          $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+        });
+      });
+    </script>
+
+    <!-- custom js-->
+    <!-- 自訂週期option 開啟modal -->
+    <script type="text/javascript">
+      $(document).ready(function () {
+        //Make script DOM ready
+        $('#specialSelect').change(function () {
+          //jQuery Change Function
+          var opval = $(this).val(); //Get value from select element
+          if (opval == 'specialOption') {
+            //Compare it and if true
+            $('#exampleModal').modal('hide'); //close first Modal
+            $('#specialSetModal').modal('show'); //Open new Modal
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

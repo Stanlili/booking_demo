@@ -1,0 +1,105 @@
+@import '_custom_color.scss';
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+
+.form-control,
+.form-select {
+  border: none !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid #ced4da !important;
+}
+
+.input-group-text {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.col-form-label{
+  color: $grey2 !important;
+}
+
+.form-check-input[type='radio']:checked {
+  background-color: $black !important;
+  border-color: $black !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: $white !important;
+  background-color: $main_color !important;
+}
+
+.nav-link {
+  padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: var(--bs-nav-link-font-weight);
+  color: $white;
+}
+
+.nav-item{
+  text-align: center !important;
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: $main_color !important;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0px !important;
+}
+
+.btn-primary {
+  @include button-variant($main_color, darken($main_color, 7.5%), darken($main_color, 10%), lighten($main_color,5%), lighten($main_color, 10%), darken($main_color,30%));
+}
+
+.btn-secondary {
+  @include button-variant($secondary_color, darken($secondary_color, 7.5%), darken($secondary_color, 10%), lighten($secondary_color,5%), lighten($secondary_color, 10%), darken($secondary_color,30%));
+}
+
+.btn-outline-primary {
+  @include button-outline-variant($main_color, #fff, lighten($main_color,5%), $main_color,#fff);
+}
+
+.btn-outline-secondary {
+  @include button-outline-variant($grey3, #222222, lighten($grey3,5%), $grey3);
+}
+
+.btn-green2 {
+  @include button-variant($green2_color, darken($green2_color, 7.5%), darken($green2_color, 10%), lighten($green2_color,5%), lighten($green2_color, 10%), darken($green2_color,30%));
+}
+
+.btn-grey3 {
+  @include button-variant($grey3, darken($grey3, 7.5%), darken($grey3, 10%), lighten($grey3,5%), lighten($grey3, 10%), darken($grey3,30%));
+}
+
+.btn-grey2 {
+  @include button-variant($grey2, darken($grey2, 7.5%), darken($grey2, 10%), lighten($grey2,5%), lighten($grey2, 10%), darken($grey2,30%));
+}
+
+.btn-blue2 {
+  @include button-variant($blue2_color, darken($blue2_color, 7.5%), darken($blue2_color, 10%), lighten($blue2_color,5%), lighten($blue2_color, 10%), darken($blue2_color,30%));
+}
+
+.btn-sit-favor {
+  @include button-outline-variant($grey3, #222222, lighten($grey3,5%), $grey3);
+}
+
+.btn-line {
+  @include button-variant($line_color, darken($line_color, 7.5%), darken($line_color, 10%), lighten($line_color,5%), lighten($line_color, 10%), darken($line_color,30%));
+}
+
+
+// .btn-check:active+.btn, .btn-check:checked+.btn, .btn.active, .btn.show, .btn:active {
+//   color: $black !important;
+//   background-color: $secondary_color !important;
+//   border-color: $secondary_color !important;
+// }
+
+.btn-check:checked+.btn{
+  color: $black !important;
+  background-color: $secondary_color !important;
+  border-color: $secondary_color !important;
+}
+
+.form-check-input:checked {
+  background-color: #000 !important;
+  border-color: #000 !important;
+}

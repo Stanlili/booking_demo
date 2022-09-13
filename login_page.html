@@ -1,0 +1,94 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <!-- jquery css -->
+  <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.css" />
+  <link rel="stylesheet" href="node_modules/jq.schedule/dist/css/style.css" />
+  <!-- Bootstrap 5.2 CSS -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <!-- google noto TC font -->
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+  <!-- custom CSS -->
+  <link rel="stylesheet" href="css/bs_custom.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <title>登入頁</title>
+  <body>
+    <!-- container -->
+    <div class="login-bg-color">
+      <div
+        class="container-fluid d-flex flex-column justify-content-center align-items-center h-100"
+      >
+        <div class="login-input-block p-sm-4 p-4 mb-3">
+          <div class="login-title m-2 my-5 text-center">
+            <h5 class="ft-main-color fw-normal">專加訂位系統</h5>
+          </div>
+          <div class="login-input m-2 my-5">
+            <input
+              class="form-control form-control h-45px mb-3"
+              type="text"
+              placeholder="請輸入帳號"
+            />
+            <input
+              class="form-control form-control h-45px mb-3"
+              type="text"
+              placeholder="請輸入密碼"
+            />
+            <a
+              id="event_setDraggable"
+              class="no-border bg-none float-end mb-4 pe-0 d-flex"
+              href="./forgot_password_page.html"
+            >
+              <img src="./img/Icon_Quction.svg" class="w-20px me-1" />
+              <label class="color-grey1 cursor-p" for="pwRemember">忘記密碼</label>
+            </a>
+          </div>
+
+          <div class="login-btn m-2 mt-5 mb-3">
+            <button
+              type="button"
+              class="btn btn-primary btn-lg main-color color-white w-100"
+              onclick="location.href='./timeline_page.html'"
+            >
+              登入
+            </button>
+          </div>
+          <hr />
+          <div class="login-title m-2 text-center">
+            <span class="color-grey2 fw-normal tx-size14">或使用其他帳號登入</span>
+          </div>
+          <div class="login-btn text-center d-flex flex-row justify-content-center">
+            <a
+              class="d-flex align-items-center btn btn-outline-secondary google-login-btn m-2"
+              href=""
+            >
+              <img src="./img/google.png" class="w-20px" />
+            </a>
+            <a class="d-flex align-items-center btn btn-line line-login-btn no-border m-2" href="">
+              <img src="./img/LINE_Brand_icon.png" class="w-30px" />
+            </a>
+          </div>
+          <div class="login-title mt-2 text-center">
+            <span class="color-grey2 fw-normal tx-size14">2022 prox Co., LTD.</span>
+          </div>
+        </div>
+        <div class="version text-center">
+          <p class="ft-grey1">V0.0.0.1</p>
+        </div>
+      </div>
+    </div>
+    <!-- /#container -->
+  </body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+  <!-- jQuery -->
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <!-- jQuery UI -->
+  <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+  <!-- Bootstrap  -->
+  <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>

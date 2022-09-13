@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- datatables first ,then jquery,then bootstrap,then, custom -->
+    <!-- DataTables -->
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-select-bs5/css/select.bootstrap5.min.css"
+    />
+    <!-- jquery css -->
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.css" />
+    <link rel="stylesheet" href="node_modules/jq.schedule/dist/css/style.css" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- tag input -->
+    <link
+      href="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>時間軸</title>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <!-- sidebar 左側按鈕 -->
+      <div class="sidebar bg-grey1 p-3">
+        <div class="d-flex flex-column h-100">
+          <div class="side-ic text-center ic-secondary-color">
+            <img src="./img/Icon_TimeLine.svg" class="mx-auto mb-1" />
+            <a href="./timeline_page.html" class="stretched-link">時間軸</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_BusinessSetting.svg" class="mx-auto mb-1" />
+            <a href="./business_setting_page.html" class="stretched-link">營業設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_ReservationSetting.svg" class="mx-auto mb-1" />
+            <a href="./booking_setting_page.html" class="stretched-link">訂位設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AccountManagement.svg" class="mx-auto mb-1" />
+            <a href="./account_manage_page.html" class="stretched-link">帳號設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_CustomerService.svg" class="mx-auto mb-1" />
+            <a href="./customer service_page.html" class="stretched-link">客服資訊</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AdministratorSetting.svg" class="mx-auto mb-1" />
+            <a href="./admin_manage_page.html" class="stretched-link">系統管理員設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color mt-auto mb-1">
+            <img src="./img/Icon_Logout.svg" class="mx-auto" />
+            <a href="#" class="stretched-link">登出</a>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar -->
+      <!-- content-wrapper -->
+      <div class="content-wrapper h-100">
+        <!-- date/function control 功能控制列-->
+        <div class="date-func-control d-flex color-grey1 p-2">
+          <input
+            type="date"
+            class="form-control no-border tx-rem15 w-200px me-auto"
+            value="2011-09-29"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-1 color-grey1"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight3"
+            aria-controls="offcanvasRight"
+          >
+            當日列表
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-1 color-grey1"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight4"
+            aria-controls="offcanvasRight"
+          >
+            客戶資訊
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-1 bg-waring"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            座位衝突
+          </button>
+          <!-- 座位衝突發生時,class增加bg-waring -->
+          <button
+            type="button"
+            class="btn btn-outline-secondary me-1 color-main"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasRight"
+          >
+            新增訂位
+          </button>
+        </div>
+        <!-- /#date/function control -->
+        <!-- modify-control 狀態控制列-->
+        <div class="modify-control d-flex bg-grey4 p-2">
+          <select class="form-select no-border bg-grey4 w-auto tx-rem11 me-auto">
+            <option value="2" selected>中央區</option>
+            <option value="3">戶外區</option>
+          </select>
+          <button id="event_setDraggable" type="button" class="btn no-border bg-none edit-ic">
+            <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+          </button>
+          <button type="button" class="btn no-border bg-none edit-ic">
+            <img src="./img/Icon_Refresh.svg" class="mx-auto w-18px" />
+          </button>
+        </div>
+        <!-- /#modify-control -->
+        <!-- content-body schedule 時間軸-->
+        <div class="content-body h-100">
+          <div class="container-fluid h-100 pt-2">
+            <div id="schedule"></div>
+          </div>
+        </div>
+        <!-- /#content-body schedule-->
+        <!-- add/modify booking 新增/修改訂位-->
+        <div
+          class="offcanvas offcanvas-end side-panel-margin"
+          tabindex="-1"
+          id="offcanvasRight"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-body p-0">
+            <!-- title 新增/修改訂位-->
+            <div class="main-function-title ps-3">新增/修改訂位</div>
+            <!-- /#title -->
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">時間</label>
+                <div class="col ps-0">
+                  <input type="date" class="form-control" />
+                </div>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">時</option>
+                    <option value="2">11</option>
+                    <option value="3">12</option>
+                  </select>
+                </div>
+                <label class="col-auto col-form-label p-0 lh-lg">：</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">分</option>
+                    <option value="2">30</option>
+                    <option value="3">45</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">桌位</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">請選擇區域</option>
+                    <option value="2">室外區</option>
+                    <option value="3">吧檯區</option>
+                  </select>
+                </div>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">請選擇桌次</option>
+                    <option value="2">不選擇</option>
+                    <option value="3">Table1</option>
+                    <option value="4">Table2</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">大人</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">人數</option>
+                    <option value="2">10</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+                <label class="col-2 col-md-auto col-form-label">小孩</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">人數</option>
+                    <option value="2">10</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">用餐時間</label>
+                <div class="col-4 ps-0">
+                  <input type="number" class="form-control count" value="30" />
+                </div>
+                <div class="col lh-lg">
+                  <button type="button" class="btn minus no-border bg-none edit-ic me-1">
+                    <img src="./img/Icon_reduce.svg" class="mx-auto" />
+                  </button>
+                  <button type="button" class="btn plus no-border bg-none edit-ic me-1">
+                    <img src="./img/Icon_Add.svg" class="mx-auto" />
+                  </button>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="d-grid gap-2 col-12 mx-auto">
+                  <button class="btn btn-lg btn-primary color-white" type="button">過濾空桌</button>
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+            <!-- title 請選擇桌次-->
+            <div class="sec-function-title ps-3">請選擇桌次</div>
+            <!-- /#title -->
+            <!-- form 內容-->
+            <div class="container-fluid select-table p-0">
+              <!-- datatable -->
+              <table id="example2" class="table table-bordered table-hover nowrap m-0">
+                <thead class="d-none">
+                  <tr>
+                    <th>桌次</th>
+                    <th>座位人數</th>
+                  </tr>
+                </thead>
+                <tbody class="no-border">
+                  <tr>
+                    <td class="ps-3">未安排區</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3">中央區-table-3</td>
+                    <td>
+                      <img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px" />2
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3">中央區-table-2</td>
+                    <td>
+                      <img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px" />2
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="ps-3">中央區-table-1</td>
+                    <td>
+                      <img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px" />2
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- /#datatable -->
+            </div>
+            <!-- /#form -->
+            <!-- title 請輸入訂位資訊-->
+            <div class="sec-function-title ps-3">請輸入訂位資訊</div>
+            <!-- /#title -->
+            <!-- form 內容-->
+            <div class="container-fluid p-3 mb-5">
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">手機</label>
+                <div class="col ps-0">
+                  <input type="number" class="form-control" placeholder="請輸入手機" />
+                </div>
+                <label class="col-2 col-md-auto col-form-label">姓名</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入姓名" />
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">性別</label>
+                <div class="col d-flex align-items-center">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="gender1"
+                      value="option1"
+                    />
+                    <label class="form-check-label" for="gender1">男</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="gender2"
+                      value="option2"
+                    />
+                    <label class="form-check-label" for="gender2">女</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="gender3"
+                      value="option3"
+                    />
+                    <label class="form-check-label" for="gender3">其他</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-3 col-md-auto col-form-label">兒童椅</label>
+                <div class="col ps-0">
+                  <select class="form-select" required>
+                    <option value="" selected disabled hidden>張數</option>
+                    <option value="2">10</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+                <label class="col-3 col-md-auto col-form-label">兒童餐具</label>
+                <div class="col ps-0">
+                  <select class="form-select" required>
+                    <option value="" selected disabled hidden>份數</option>
+                    <option value="2">10</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">備註</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入備註" />
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+            <!-- fixed bottom btn 置底按鈕-->
+            <div
+              class="d-flex justify-content-center bg-grey5 w-100 position-absolute bottom-0 px-3 py-1"
+            >
+              <div class="d-grid gap-2 col-4 p-1">
+                <button class="btn btn-lg btn-outline-secondary color-grey1 bg-white" type="button">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col p-1">
+                <button
+                  class="btn btn-lg btn-outline-secondary color-grey1 bg-white"
+                  type="button"
+                  disabled
+                >
+                  訂位
+                </button>
+              </div>
+            </div>
+            <!-- /#fixed bottom btn -->
+          </div>
+        </div>
+        <!-- /#add/modify booking -->
+        <!-- looking booking 查看訂位-->
+        <div
+          class="offcanvas offcanvas-end side-panel-margin"
+          tabindex="-1"
+          id="offcanvasRight2"
+          aria-labelledby="offcanvasRightLabel2"
+        >
+          <div class="offcanvas-body p-0">
+            <!-- title 查看訂位-->
+            <div class="main-function-title ps-3">查看訂位</div>
+            <!-- /#title -->
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">手機</label>
+                <div class="col ps-0">
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="請輸入手機"
+                    value="0912345678"
+                    readonly
+                  />
+                </div>
+                <label class="col-2 col-md-auto col-form-label">姓名</label>
+                <div class="col ps-0">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="請輸入姓名"
+                    value="王先生"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">性別</label>
+                <div class="col d-flex align-items-center">
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="gender1"
+                      value="option1"
+                      checked
+                    />
+                    <label class="form-check-label" for="gender1">男</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="gender2"
+                      value="option2"
+                    />
+                    <label class="form-check-label" for="gender2">女</label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="gender"
+                      id="gender3"
+                      value="option3"
+                    />
+                    <label class="form-check-label" for="gender3">其他</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-3 col-md-auto col-form-label">大人</label>
+                <div class="col ps-0">
+                  <select class="form-select" required disabled>
+                    <option value="" disabled hidden>人數</option>
+                    <option value="2" selected>99</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+                <label class="col-3 col-md-auto col-form-label">小孩</label>
+                <div class="col ps-0">
+                  <select class="form-select" required disabled>
+                    <option value="" disabled hidden>人數</option>
+                    <option value="2" selected>99</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-3 col-md-auto col-form-label">兒童椅</label>
+                <div class="col ps-0">
+                  <select class="form-select" required disabled>
+                    <option value="" selected disabled hidden>張數</option>
+                    <option value="2">10</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+                <label class="col-3 col-md-auto col-form-label">兒童餐具</label>
+                <div class="col ps-0">
+                  <select class="form-select" required disabled>
+                    <option value="" selected disabled hidden>份數</option>
+                    <option value="2">10</option>
+                    <option value="3">11</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">備註</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入備註" disabled />
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+            <!-- control btn 訂位控制按鈕 -->
+            <div class="container-fluid">
+              <div class="row bg-grey3 py-2">
+                <div class="d-grid gap-2 col-auto">
+                  <button
+                    class="btn btn-lg btn-outline-secondary color-grey1 bg-white tx-size16"
+                    type="button"
+                  >
+                    取消訂位
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col p-0">
+                  <button class="btn btn-lg btn-primary color-white tx-size16" type="button">
+                    查看顧客資料
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col-auto">
+                  <button class="btn btn-lg btn-primary color-white tx-size16" type="button">
+                    修改訂位
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- /#control btn -->
+            <!-- title 請選擇桌次-->
+            <div class="sec-function-title ps-3">訂位狀態</div>
+            <!-- /#title -->
+            <!-- control btn 訂位狀態按鈕 -->
+            <div class="container-fluid">
+              <div class="row py-2">
+                <div class="d-grid gap-2 col">
+                  <button
+                    class="btn btn-lg btn-secondary color-black bg-secondary tx-size16"
+                    type="button"
+                  >
+                    入座
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button
+                    class="btn btn-lg btn-secondary color-black bg-secondary tx-size16"
+                    type="button"
+                  >
+                    部分入座
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button class="btn btn-lg btn-green2 color-black tx-size16" type="button">
+                    遲到
+                  </button>
+                </div>
+              </div>
+              <div class="row py-2">
+                <div class="d-grid gap-2 col">
+                  <button class="btn btn-lg btn-green2 color-black tx-size16" type="button">
+                    保留
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button class="btn btn-lg btn-green2 color-black tx-size16" type="button">
+                    確認
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button class="btn btn-lg btn-grey3 color-black tx-size16" type="button">
+                    失約
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- /#control btn -->
+            <!-- title 請輸入訂位資訊-->
+            <div class="sec-function-title ps-3">桌次狀態</div>
+            <!-- /#title -->
+            <!-- control btn 訂位狀態按鈕 -->
+            <div class="container-fluid">
+              <div class="row py-2">
+                <div class="d-grid gap-2 col">
+                  <button
+                    class="btn btn-lg btn-secondary color-black bg-secondary tx-size16"
+                    type="button"
+                  >
+                    指定桌次
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button
+                    class="btn btn-lg btn-secondary color-black bg-secondary tx-size16"
+                    type="button"
+                  >
+                    換桌
+                  </button>
+                </div>
+                <div class="d-grid gap-2 col">
+                  <button class="btn btn-lg btn-blue2 color-black tx-size16" type="button">
+                    併桌
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- /#control btn -->
+          </div>
+        </div>
+        <!-- /#looking booking -->
+        <!-- today list 當日列表-->
+        <div
+          class="offcanvas offcanvas-end side-panel-margin"
+          tabindex="-1"
+          id="offcanvasRight3"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-body p-0">
+            <!-- tabs btn -->
+            <ul class="nav nav-pills" id="pills-tab" role="tablist">
+              <li class="nav-item col" role="presentation">
+                <button
+                  class="nav-link bg-grey2 w-100 active"
+                  id="pills-home-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-home"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-home"
+                  aria-selected="true"
+                >
+                  當日訂位列表
+                </button>
+              </li>
+              <li class="nav-item col" role="presentation">
+                <button
+                  class="nav-link w-100 bg-grey2"
+                  id="pills-profile-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-profile"
+                  aria-selected="false"
+                >
+                  當日空桌
+                </button>
+              </li>
+            </ul>
+            <!-- /#tabs btn -->
+            <!-- tabs -->
+            <div class="tab-content" id="pills-tabContent">
+              <!-- 當日訂位列表tab -->
+              <div
+                class="tab-pane fade show active"
+                id="pills-home"
+                role="tabpanel"
+                aria-labelledby="pills-home-tab"
+                tabindex="0"
+              >
+                <table class="table align-middle">
+                  <tbody>
+                    <tr>
+                      <td>11:30<br />3大1小</td>
+                      <td>
+                        王先生<br />
+                        <span class="color-grey2">0912345678</span>
+                      </td>
+                      <td class="text-end">中央區-Table3 失約</td>
+                    </tr>
+                    <tr>
+                      <td>11:45<br />6大2小</td>
+                      <td>
+                        W先生<br />
+                        <span class="color-grey2">0912555666</span>
+                      </td>
+                      <td class="text-end color-waring">未安排區</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /#當日訂位列表tab -->
+              <!-- 當日空桌tab -->
+              <div
+                class="tab-pane fade"
+                id="pills-profile"
+                role="tabpanel"
+                aria-labelledby="pills-profile-tab"
+                tabindex="0"
+              >
+                <!-- form 內容-->
+                <div class="container-fluid p-3">
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">時間</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">時</option>
+                        <option value="2">11</option>
+                        <option value="3">12</option>
+                      </select>
+                    </div>
+                    <label class="col-auto col-form-label p-0 lh-lg">：</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">分</option>
+                        <option value="2">30</option>
+                        <option value="3">45</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">桌位</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">請選擇區域</option>
+                        <option value="2">室外區</option>
+                        <option value="3">吧檯區</option>
+                      </select>
+                    </div>
+                    <div class="col ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">請選擇桌次</option>
+                        <option value="2">不選擇</option>
+                        <option value="3">Table1</option>
+                        <option value="4">Table2</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">大人</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">人數</option>
+                        <option value="2">10</option>
+                        <option value="3">11</option>
+                      </select>
+                    </div>
+                    <label class="col-2 col-md-auto col-form-label">小孩</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required="">
+                        <option value="" selected="" disabled="" hidden="">人數</option>
+                        <option value="2">10</option>
+                        <option value="3">11</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">用餐時間</label>
+                    <div class="col-4 ps-0">
+                      <input type="number" class="form-control count" value="30" />
+                    </div>
+                    <div class="col lh-lg">
+                      <button type="button" class="btn minus no-border bg-none edit-ic me-1">
+                        <img src="./img/Icon_reduce.svg" class="mx-auto" />
+                      </button>
+                      <button type="button" class="btn plus no-border bg-none edit-ic me-1">
+                        <img src="./img/Icon_Add.svg" class="mx-auto" />
+                      </button>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="d-grid gap-2 col-12 mx-auto">
+                      <button class="btn btn-lg btn-primary color-white" type="button">
+                        過濾空桌
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- /#form -->
+                <!-- title 請選擇桌次-->
+                <div class="sec-function-title ps-3">請選擇桌次</div>
+                <!-- /#title -->
+                <!-- form 內容-->
+                <div class="container-fluid select-table p-0">
+                  <!-- datatable -->
+                  <table id="example3" class="table table-bordered table-hover nowrap m-0">
+                    <thead class="d-none">
+                      <tr>
+                        <th>桌次</th>
+                        <th>座位人數</th>
+                      </tr>
+                    </thead>
+                    <tbody class="no-border">
+                      <tr>
+                        <td class="ps-3">未安排區</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td class="ps-3">中央區-table-3</td>
+                        <td>
+                          <img
+                            src="./img/Icon_Chair.svg"
+                            class="timeline-ic ic-grey2-color w-15px"
+                          />2
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="ps-3">中央區-table-2</td>
+                        <td>
+                          <img
+                            src="./img/Icon_Chair.svg"
+                            class="timeline-ic ic-grey2-color w-15px"
+                          />2
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="ps-3">中央區-table-1</td>
+                        <td>
+                          <img
+                            src="./img/Icon_Chair.svg"
+                            class="timeline-ic ic-grey2-color w-15px"
+                          />2
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- /#datatable -->
+                </div>
+                <!-- /#form -->
+                <!-- title 請輸入訂位資訊-->
+                <div class="sec-function-title ps-3">請輸入訂位資訊</div>
+                <!-- /#title -->
+                <!-- form 內容-->
+                <div class="container-fluid p-3 mb-5">
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">手機</label>
+                    <div class="col ps-0">
+                      <input type="number" class="form-control" placeholder="請輸入手機" />
+                    </div>
+                    <label class="col-2 col-md-auto col-form-label">姓名</label>
+                    <div class="col ps-0">
+                      <input type="text" class="form-control" placeholder="請輸入姓名" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">性別</label>
+                    <div class="col d-flex align-items-center">
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="gender1"
+                          value="option1"
+                        />
+                        <label class="form-check-label" for="gender1">男</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="gender2"
+                          value="option2"
+                        />
+                        <label class="form-check-label" for="gender2">女</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gender"
+                          id="gender3"
+                          value="option3"
+                        />
+                        <label class="form-check-label" for="gender3">其他</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-3 col-md-auto col-form-label">兒童椅</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required>
+                        <option value="" selected disabled hidden>張數</option>
+                        <option value="2">10</option>
+                        <option value="3">11</option>
+                      </select>
+                    </div>
+                    <label class="col-3 col-md-auto col-form-label">兒童餐具</label>
+                    <div class="col ps-0">
+                      <select class="form-select" required>
+                        <option value="" selected disabled hidden>份數</option>
+                        <option value="2">10</option>
+                        <option value="3">11</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-2 col-md-auto col-form-label">備註</label>
+                    <div class="col ps-0">
+                      <input type="text" class="form-control" placeholder="請輸入備註" />
+                    </div>
+                  </div>
+                </div>
+                <!-- /#form -->
+                <!-- fixed bottom btn 置底按鈕-->
+                <div
+                  class="d-flex justify-content-center bg-grey5 w-100 position-absolute bottom-0 px-3 py-1"
+                >
+                  <div class="d-grid gap-2 col-4 p-1">
+                    <button
+                      class="btn btn-lg btn-outline-secondary color-grey1 bg-white"
+                      type="button"
+                    >
+                      取消
+                    </button>
+                  </div>
+                  <div class="d-grid gap-2 col p-1">
+                    <button
+                      class="btn btn-lg btn-outline-secondary color-grey1 bg-white"
+                      type="button"
+                      disabled
+                    >
+                      訂位
+                    </button>
+                  </div>
+                </div>
+                <!-- /#fixed bottom btn -->
+              </div>
+              <!-- /#當日空桌tab -->
+            </div>
+            <!-- /#tabs -->
+          </div>
+        </div>
+        <!-- /#today list -->
+        <!-- customer info 客戶資訊 -->
+        <div
+          class="offcanvas offcanvas-end side-panel-margin w-75"
+          tabindex="-1"
+          id="offcanvasRight4"
+          aria-labelledby="offcanvasRightLabel"
+        >
+          <div class="offcanvas-body overflow-hidden p-0">
+            <!-- title 客戶資訊-->
+            <div class="main-function-title ps-3">客戶資訊</div>
+            <!-- /#title -->
+            <div class="container-fluid h-100">
+              <div class="row h-100">
+                <!-- 左側模糊搜尋 -->
+                <div class="col-4 px-0 position-fixed w-255px">
+                  <div class="row pt-1">
+                    <div class="col">
+                      <input type="text" class="form-control" placeholder="請輸入名稱or手機搜尋" />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <!-- form 搜尋內容-->
+                    <div class="container-fluid select-table">
+                      <!-- datatable -->
+                      <table
+                        id="example4"
+                        class="table table-bordered table-hover nowrap m-0 overflow-scroll h-80vh"
+                      >
+                        <thead class="d-none">
+                          <tr>
+                            <th>姓名</th>
+                            <th>電話</th>
+                          </tr>
+                        </thead>
+                        <tbody class="no-border">
+                          <tr>
+                            <td class="ps-3">S先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">王先生</td>
+                            <td>091234568</td>
+                          </tr>
+                          <tr>
+                            <td class="ps-3">S先生</td>
+                            <td>091234568</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- /#datatable -->
+                    </div>
+                    <!-- /#form -->
+                  </div>
+                </div>
+                <!-- /#左側模糊搜尋 -->
+                <!-- 右側功能 -->
+                <div class="col p-0 border-start cus-info-ml">
+                  <!-- tabs btn -->
+                  <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item col" role="presentation">
+                      <button
+                        class="nav-link bg-grey2 w-100 active"
+                        id="pills-home-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#pills-home2"
+                        type="button"
+                        role="tab"
+                      >
+                        基本資料
+                      </button>
+                    </li>
+                    <li class="nav-item col" role="presentation" hidden>
+                      <button class="nav-link w-100 bg-grey3 color-grey4" type="button" disabled>
+                        消費紀錄
+                      </button>
+                    </li>
+                    <li class="nav-item col" role="presentation">
+                      <button
+                        class="nav-link bg-grey2 w-100"
+                        id="pills-home-tab"
+                        data-bs-toggle="pill"
+                        data-bs-target="#orderRecord"
+                        type="button"
+                        role="tab"
+                      >
+                        訂位資訊
+                      </button>
+                    </li>
+                  </ul>
+                  <!-- /#tabs btn -->
+                  <!-- tabs -->
+                  <div class="tab-content h-100" id="pills-tabContent">
+                    <!-- 基本資料tab -->
+                    <div
+                      class="tab-pane fade show active h-100"
+                      id="pills-home2"
+                      role="tabpanel"
+                      aria-labelledby="pills-home-tab"
+                      tabindex="0"
+                    >
+                      <!-- modify-control 狀態控制列-->
+                      <div class="modify-control d-flex flex-row-reverse bg-grey4 p-2">
+                        <button type="button" class="btn no-border bg-none edit-ic">
+                          <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                        </button>
+                        <button type="button" class="btn no-border bg-none edit-ic">
+                          <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+                        </button>
+                      </div>
+                      <!-- /#modify-control -->
+                      <!-- form 內容-->
+                      <div class="container-fluid cus-info-form-scroll p-3">
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">手機</label>
+                          <div class="col ps-0">
+                            <input type="number" class="form-control" value="0912345678" />
+                          </div>
+                          <label class="col-2 col-md-auto col-form-label">姓名</label>
+                          <div class="col ps-0">
+                            <input type="text" class="form-control" value="王先生" />
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">性別</label>
+                          <div class="col d-flex align-items-center">
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="gender1"
+                                value="option1"
+                              />
+                              <label class="form-check-label" for="gender1">男</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="gender2"
+                                value="option2"
+                              />
+                              <label class="form-check-label" for="gender2">女</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="gender3"
+                                value="option3"
+                              />
+                              <label class="form-check-label" for="gender3">其他</label>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">email</label>
+                          <div class="col ps-0">
+                            <input type="email" class="form-control" />
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">座位喜好</label>
+                          <div class="col ps-0">
+                            <input
+                              type="text"
+                              class="form-control"
+                              data-role="tagsinput"
+                              placeholder="請輸入備註"
+                              value="靠窗,靠走道,沙發區"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            class="col-auto btn no-border bg-none edit-ic"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2"
+                          >
+                            <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                          </button>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">食物喜好</label>
+                          <div class="col ps-0">
+                            <input
+                              type="text"
+                              class="form-control"
+                              data-role="tagsinput"
+                              placeholder="請輸入備註"
+                              value="辣,大辣,酸"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            class="col-auto btn no-border bg-none edit-ic"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2"
+                          >
+                            <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                          </button>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">特殊身分</label>
+                          <div class="col ps-0">
+                            <input
+                              type="text"
+                              class="form-control"
+                              data-role="tagsinput"
+                              placeholder="請輸入備註"
+                              value="總統,VIP,老闆朋友"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            class="col-auto btn no-border bg-none edit-ic"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2"
+                          >
+                            <img src="./img/Icon_Add.svg" class="mx-auto w-18px" />
+                          </button>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-md-auto col-form-label">其他備註</label>
+                          <div class="col ps-0">
+                            <input type="text" class="form-control" placeholder="請輸入備註" />
+                          </div>
+                        </div>
+                        <div class="row mb-3">
+                          <label class="col-2 col-form-label">
+                            <img src="./img/Icon_TotalAmount.svg" class="mx-auto w-25px" />
+                          </label>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg color-main">99999999</h5>
+                          </div>
+                          <label class="col-2 col-form-label pe-0">
+                            <img src="./img/Icon_TotalAmount.svg" class="mx-auto w-25px" />
+                          </label>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg color-black">
+                              <span class="me-1">3mths</span>
+                            </h5>
+                          </div>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg color-main">99999999</h5>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <label class="col-2 col-form-label">
+                            <img src="./img/Icon_Booking.svg" class="mx-auto w-30px" />
+                          </label>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg">5</h5>
+                          </div>
+                          <label class="col-2 col-form-label">
+                            <img src="./img/Icon_Show.svg" class="mx-auto w-25px" />
+                          </label>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg">4</h5>
+                          </div>
+                          <label class="col-2 col-form-label">
+                            <img src="./img/Icon_CancelOrder.svg" class="mx-auto w-30px" />
+                          </label>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg">1</h5>
+                          </div>
+                          <label class="col-2 col-form-label">
+                            <img src="./img/Icon_NoShow.svg" class="mx-auto w-25px" />
+                          </label>
+                          <div class="col-auto ps-0">
+                            <h5 class="m-0 lh-lg">0</h5>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /#form -->
+                      <!-- fixed bottom btn 置底按鈕-->
+                      <div class="d-flex justify-content-center bg-grey5 w-100 px-3 py-1">
+                        <div class="d-grid gap-2 col-4 p-1">
+                          <button
+                            class="btn btn-lg btn-outline-secondary color-grey1 bg-white"
+                            type="button"
+                          >
+                            取消
+                          </button>
+                        </div>
+                        <div class="d-grid gap-2 col p-1">
+                          <button
+                            class="btn btn-lg btn-outline-secondary color-grey1 bg-white"
+                            type="button"
+                            disabled
+                          >
+                            訂位
+                          </button>
+                        </div>
+                      </div>
+                      <!-- /#fixed bottom btn -->
+                    </div>
+                    <!-- /#基本資料tab -->
+                    <!-- 訂位紀錄tab -->
+                    <div
+                      class="tab-pane fade"
+                      id="orderRecord"
+                      role="tabpanel"
+                      aria-labelledby="orderRecord"
+                      tabindex="0"
+                    >
+                      <table class="table align-middle">
+                        <tbody>
+                          <tr>
+                            <td>2022/07/28 11:30<br />3大1小</td>
+                            <td>嬰兒座椅*1<br />兒童餐具*1</td>
+                            <td class="text-end">中央區-Table3</td>
+                            <td>
+                              <button
+                                type="button"
+                                class="btn no-border bg-none edit-ic me-1"
+                                data-bs-dismiss="modal"
+                              >
+                                <img src="./img/Icon_Moive.svg" class="mx-auto" />
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- /#訂位紀錄tab -->
+                  </div>
+                  <!-- /#tabs -->
+                </div>
+                <!-- /#右側功能 -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /#customer info 客戶資訊 -->
+      </div>
+      <!-- /#content-wrapper -->
+    </div>
+    <!-- 座位衝突modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">座位衝突</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <table class="table align-middle">
+              <tbody>
+                <tr>
+                  <td>2022/07/28</td>
+                  <td>11:30</td>
+                  <td>王先生</td>
+                  <td>3大1小</td>
+                  <td>嬰兒座椅*1</td>
+                  <td>兒童餐具*1</td>
+                  <td>中央區-Table3</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn no-border bg-none edit-ic me-1"
+                      data-bs-dismiss="modal"
+                    >
+                      <img src="./img/Icon_Moive.svg" class="mx-auto" />
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2022/07/28</td>
+                  <td>11:30</td>
+                  <td>S先生</td>
+                  <td>4大1小</td>
+                  <td>嬰兒座椅*1</td>
+                  <td>兒童餐具*1</td>
+                  <td>中央區-Table3</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn no-border bg-none edit-ic me-1"
+                      data-bs-dismiss="modal"
+                    >
+                      <img src="./img/Icon_Moive.svg" class="mx-auto" />
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2022/07/28</td>
+                  <td>11:30</td>
+                  <td>G先生</td>
+                  <td>2大1小</td>
+                  <td></td>
+                  <td></td>
+                  <td>中央區-Table4</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn no-border bg-none edit-ic me-1"
+                      data-bs-dismiss="modal"
+                    >
+                      <img src="./img/Icon_Moive.svg" class="mx-auto" />
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2022/07/28</td>
+                  <td>11:30</td>
+                  <td>H先生</td>
+                  <td>9大1小</td>
+                  <td></td>
+                  <td></td>
+                  <td>中央區-Table4</td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn no-border bg-none edit-ic me-1"
+                      data-bs-dismiss="modal"
+                    >
+                      <img src="./img/Icon_Moive.svg" class="mx-auto" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#座位衝突modal -->
+    <!-- 座位喜好modal -->
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">座位喜好</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="d-flex flex-wrap">
+              <input type="checkbox" class="btn-check" id="btn-check" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check">靠窗</label>
+              <input type="checkbox" class="btn-check" id="btn-check2" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check2">靠走道</label>
+              <input type="checkbox" class="btn-check" id="btn-check3" autocomplete="off" />
+              <label class="btn btn-sit-favor m-1" for="btn-check3">沙發區</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#座位喜好modal -->
+    <!-- 點數不足modal -->
+    <div
+      class="modal fade"
+      id="pointModal"
+      tabindex="-1"
+      aria-labelledby="pointModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pointModal">點數不足</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-center">
+            <h5>您的簡訊點數即將用罄</h5>
+            <h5>簡訊點數剩餘50點</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#點數不足modal -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <!-- jQuery schedule -->
+    <script src="node_modules/jq.schedule/dist/js/jq.schedule.js"></script>
+    <!-- mobile touch -->
+    <script src="component/jquery-ui-touch-punch-master/jquery.ui.touch-punch.js"></script>
+    <!-- Bootstrap  -->
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- DataTables & Plugins -->
+    <script src="node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="node_modules/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="node_modules/datatables.net-select-bs5/js/select.bootstrap5.min.js"></script>
+
+    <!-- tag input 喜好設定input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
+    <script src="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
+
+    <!-- mobile touch can be drag 行動裝置拖拉支援元件-->
+    <script type="text/javascript">
+      $('.sc_bar').draggable();
+    </script>
+
+    <!-- jq.schedule https://github.com/ateliee/jquery.schedule 時間軸元件-->
+    <script type="text/javascript">
+      $(function () {
+        var isDraggable = true;
+        var $sc = $('#schedule').timeSchedule({
+          startTime: '10:00', // schedule start time(HH:ii)
+          endTime: '21:00', // schedule end time(HH:ii)
+          widthTime: 60 * 30, // cell timestamp example 30 minutes
+          timeLineY: 60, // height(px)
+          verticalScrollbar: 20, // scrollbar (px)
+          timeLineBorder: 2, // border(top and bottom)
+          bundleMoveWidth: 6, // width to move all schedules to the right of the clicked time line cell
+          draggable: false,
+          resizable: false,
+          widthTimeX: 80, //1cell width(px)
+          rows: {
+            0: {
+              title: '未安排區',
+              schedule: [
+                {
+                  start: '10:00',
+                  end: '11:00',
+                  text: '99大99小 王先生',
+                  data: { class: 'bar-waiting-color' },
+                },
+              ],
+            },
+            1: {
+              title: '未安排區',
+            },
+            2: {
+              title:
+                'Table1<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+              schedule: [
+                {
+                  start: '12:00',
+                  end: '13:00',
+                  text: '9大 王先生 [併-table-3]',
+                  data: { class: 'bar-combine-color' },
+                },
+              ],
+            },
+            3: {
+              title:
+                'Table2<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+              schedule: [
+                {
+                  start: '13:00',
+                  end: '14:00',
+                  text: '99大99小 S先生 [遲]',
+                  data: { class: 'bar-confirm-color' },
+                },
+              ],
+            },
+            4: {
+              title:
+                'Table3<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+              schedule: [
+                {
+                  start: '12:00',
+                  end: '13:00',
+                  text: '9大 王先生 [併-table-3]',
+                  data: { class: 'bar-combine-color' },
+                },
+              ],
+            },
+            5: {
+              title:
+                'Table4<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+            6: {
+              title:
+                'Table6<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+            7: {
+              title:
+                'Table7<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+            8: {
+              title:
+                'Table9<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+            9: {
+              title:
+                'Table10<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+            10: {
+              title:
+                'Table11<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+            11: {
+              title:
+                'Table12<br/><img src="./img/Icon_Chair.svg" class="timeline-ic ic-grey2-color w-15px"/><p class="me-2 d-inline">2</p><img src="./img/Icon_Merge.svg" class="timeline-ic ic-grey2-color w-20px"/><img src="./img/Icon_ReservationSetting.svg" class="timeline-ic ic-grey2-color w-20px"/>',
+            },
+          },
+          onAppendSchedule: function (node, data) {
+            if (data.data.class) {
+              node.addClass(data.data.class);
+            }
+          },
+          onScheduleClick: function (node, time, timeline) {
+            var start = time;
+            var end = $(this).timeSchedule(
+              'formatTime',
+              $(this).timeSchedule('calcStringTime', time) + 3600 //新增組數的預設時間長度1hr
+            );
+            $(this).timeSchedule('addSchedule', timeline, {
+              start: start,
+              end: end,
+              text: '4大2小 李小姐',
+              data: {
+                class: 'sc_bar_insert',
+              },
+            });
+          },
+        });
+        $('#event_resetData').on('click', function () {
+          $sc.timeSchedule('resetData');
+        });
+        $('#event_setDraggable').on('click', function () {
+          isDraggable = !isDraggable;
+          $sc.timeSchedule('setDraggable', isDraggable);
+        });
+        $('#clear-logs').on('click', function () {
+          $('#logs .table').empty();
+        });
+        $('.bar-waiting-color').on('click', function () {
+          $('.bar-waiting-color').attr('data-bs-toggle', 'offcanvas');
+          $('.bar-waiting-color').attr('data-bs-target', '#offcanvasRight2');
+          $('.bar-waiting-color').attr('aria-controls', 'offcanvasRight');
+        });
+      });
+    </script>
+
+    <!-- input plus number 用餐時間加減-->
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(document).on('click', '.plus', function () {
+          $('.count').val(parseInt($('.count').val()) + 15);
+        });
+        $(document).on('click', '.minus', function () {
+          $('.count').val(parseInt($('.count').val()) - 15);
+          if ($('.count').val() < 30) {
+            $('.count').val(30);
+          }
+        });
+      });
+    </script>
+
+    <!-- DataTables Page specific script 桌次選擇datatable-->
+    <script>
+      $(function () {
+        $('#example2').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+        });
+        $('#example3').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+        });
+        $('#example4').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+        });
+
+        //增加class至客戶資訊內模糊搜尋的table，使其可scroll
+        var table = $('#example4').DataTable();
+        $(table.table().container()).addClass('cus-info-table');
+      });
+    </script>
+
+    <!-- 簡訊點數提醒 -->
+    <script type="text/javascript">
+      $(window).on('load', function () {
+        $('#pointModal').modal('show');
+      });
+    </script>
+  </body>
+</html>

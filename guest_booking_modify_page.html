@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>訂位首頁</title>
+  </head>
+  <body>
+    <div class="desktop-width">
+      <!-- logo img -->
+      <div class="container-fluid">
+        <div class="row d-flex align-items-center py-2">
+          <div class="col-12 mb-3">
+            <div class="d-flex logo-area">
+              <img src="img/100x100.png" class="img-fluid mx-auto d-block h-100" alt="logo" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#logo img -->
+      <!--service title  -->
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="service-title lh-lg h-30px">訂位資訊</div>
+        </div>
+      </div>
+      <!--/#service title  -->
+      <!-- form -->
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <label class="col-3 col-md-auto col-form-label">訂位號碼</label>
+          <div class="col d-flex align-items-center p-0">
+            <h1 class="m-0 color-main">22516</h1>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-2 col-md-auto col-form-label">時間</label>
+          <div class="col p-0">
+            <input type="date" class="form-control" />
+          </div>
+          <label class="col-2 col-md-auto col-form-label">餐期</label>
+          <div class="col ps-0">
+            <select class="form-select" required>
+              <option value="" selected disabled hidden>餐期</option>
+              <option value="2">上午</option>
+              <option value="3">晚上</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-2 col-md-auto col-form-label">大人</label>
+          <div class="col ps-0">
+            <select class="form-select" required>
+              <option value="" selected disabled hidden>人數</option>
+              <option value="2">10</option>
+              <option value="3">11</option>
+            </select>
+          </div>
+          <label class="col-2 col-md-auto col-form-label">小孩</label>
+          <div class="col ps-0">
+            <select class="form-select" required>
+              <option value="" selected disabled hidden>人數</option>
+              <option value="2">10</option>
+              <option value="3">11</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- /#form -->
+      <!--service title  -->
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="d-flex justify-content-between service-title lh-lg h-30px">
+            訂位時段(餐期名稱)
+            <div
+              class="pe-2"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseExample4"
+              aria-expanded="false"
+              aria-controls="collapseExample4"
+            >
+              <i class="submenu-icon-close fas fa-angle-up ml-5 pl-5" aria-hidden="true"></i>
+              <i class="submenu-icon-open fas fa-angle-down ml-5 pl-5" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/#service title  -->
+      <!-- form -->
+      <div class="collapse accordion-item" id="collapseExample4">
+        <div class="container-fluid">
+          <div class="row mb-3">
+            <div class="col d-flex flex-wrap">
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="option1"
+                autocomplete="off"
+              />
+              <label class="btn btn-lg btn-outline-primary m-1 pick-time-btn" for="option1"
+                >10:00<br />可訂位</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="option2"
+                autocomplete="off"
+              />
+              <label class="btn btn-lg btn-outline-primary m-1 pick-time-btn" for="option2"
+                >10:15<br />可訂位</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="option3"
+                autocomplete="off"
+                disabled
+              />
+              <label class="btn btn-lg btn-outline-primary m-1 pick-time-btn" for="option3"
+                >10:30 <br />已客滿</label
+              >
+
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="option4"
+                autocomplete="off"
+              />
+              <label class="btn btn-lg btn-outline-primary m-1 pick-time-btn" for="option4"
+                >10:45<br />可訂位</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="option5"
+                autocomplete="off"
+              />
+              <label class="btn btn-lg btn-outline-primary m-1 pick-time-btn" for="option5"
+                >11:00<br />可訂位</label
+              >
+              <input
+                type="radio"
+                class="btn-check"
+                name="options"
+                id="option6"
+                autocomplete="off"
+              />
+              <label class="btn btn-lg btn-outline-primary m-1 pick-time-btn" for="option6"
+                >11:15<br />可訂位</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#form -->
+      <!--service title  -->
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <div class="service-title lh-lg h-30px">訂位資訊</div>
+        </div>
+      </div>
+      <!--/#service title  -->
+      <!-- form -->
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <label class="col-2 col-md-auto col-form-label">手機</label>
+          <div class="col ps-0">
+            <input type="number" class="form-control" placeholder="請輸入手機" />
+          </div>
+          <label class="col-2 col-md-auto col-form-label">姓名</label>
+          <div class="col ps-0">
+            <input type="text" class="form-control" placeholder="請輸入姓名" />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-2 col-md-auto col-form-label">性別</label>
+          <div class="col d-flex align-items-center">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gender"
+                id="gender1"
+                value="option1"
+              />
+              <label class="form-check-label" for="gender1">男</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gender"
+                id="gender2"
+                value="option2"
+              />
+              <label class="form-check-label" for="gender2">女</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="gender"
+                id="gender3"
+                value="option3"
+              />
+              <label class="form-check-label" for="gender3">其他</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="col-3 col-md-auto col-form-label">兒童椅</label>
+          <div class="col ps-0">
+            <select class="form-select" required>
+              <option value="" selected disabled hidden>張數</option>
+              <option value="2">10</option>
+              <option value="3">11</option>
+            </select>
+          </div>
+          <label class="col-3 col-md-auto col-form-label">兒童餐具</label>
+          <div class="col ps-0">
+            <select class="form-select" required>
+              <option value="" selected disabled hidden>份數</option>
+              <option value="2">10</option>
+              <option value="3">11</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-2 col-md-auto col-form-label">備註</label>
+          <div class="col ps-0">
+            <input type="text" class="form-control" placeholder="請輸入備註" />
+          </div>
+        </div>
+      </div>
+      <!-- /#form -->
+      <!-- fixed button -->
+      <div class="container-fluid fixed-bottom bg-grey5">
+        <div class="row my-3">
+          <div class="d-grid gap-2 col-auto col-md-3 mx-auto">
+            <button class="btn btn-lg btn-outline-secondary" type="button" onclick="history.back()">
+              放棄修改
+            </button>
+          </div>
+          <div class="d-grid gap-2 col col-md-9 mx-auto">
+            <button
+              class="btn btn-lg btn-primary color-white"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal1"
+            >
+              修改訂位
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- /#fixed button -->
+
+      <!-- modal-修改成功 -->
+      <div
+        class="modal fade"
+        id="exampleModal1"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header d-flex justify-content-center">
+              <h3 class="modal-title color-main my-3" id="exampleModalLabel">修改成功/失敗</h3>
+            </div>
+            <div class="modal-body color-grey2 my-3 text-center">
+              <h3>訂位修改成功/失敗</h3>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <div class="row w-100">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                  <button
+                    type="button"
+                    class="btn btn-primary color-white px-4"
+                    data-bs-dismiss="modal"
+                    onclick="location.href='./guest_booking_record_page.html'"
+                  >
+                    確定
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /#modal-訂位成功 -->
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

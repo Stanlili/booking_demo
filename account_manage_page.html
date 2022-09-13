@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- datatables first ,then jquery,then bootstrap,then, custom -->
+    <!-- DataTables -->
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="node_modules/datatables.net-select-bs5/css/select.bootstrap5.min.css"
+    />
+    <!-- jquery css -->
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.css" />
+    <link rel="stylesheet" href="node_modules/jq.schedule/dist/css/style.css" />
+    <!-- Bootstrap 5.2 CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- google noto TC font -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+    <!-- custom CSS -->
+    <link rel="stylesheet" href="css/bs_custom.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>帳號設定</title>
+  </head>
+  <body>
+    <div class="container-fluid p-0">
+      <!-- sidebar 左側按鈕 -->
+      <div class="sidebar bg-grey1 p-3">
+        <div class="d-flex flex-column h-100">
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_TimeLine.svg" class="mx-auto mb-1" />
+            <a href="./timeline_page.html" class="stretched-link">時間軸</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_BusinessSetting.svg" class="mx-auto mb-1" />
+            <a href="./business_setting_page.html" class="stretched-link">營業設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_ReservationSetting.svg" class="mx-auto mb-1" />
+            <a href="./booking_setting_page.html" class="stretched-link">訂位設定</a>
+          </div>
+          <div class="side-ic text-center ic-secondary-color">
+            <img src="./img/Icon_AccountManagement.svg" class="mx-auto mb-1" />
+            <a href="./account_manage_page.html" class="stretched-link">帳號設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_CustomerService.svg" class="mx-auto mb-1" />
+            <a href="./customer service_page.html" class="stretched-link">客服資訊</a>
+          </div>
+          <div class="side-ic text-center ic-white-color">
+            <img src="./img/Icon_AdministratorSetting.svg" class="mx-auto mb-1" />
+            <a href="./admin_manage_page.html" class="stretched-link">系統管理員設定</a>
+          </div>
+          <div class="side-ic text-center ic-white-color mt-auto mb-1">
+            <img src="./img/Icon_Logout.svg" class="mx-auto" />
+            <a href="#" class="stretched-link">登出</a>
+          </div>
+        </div>
+      </div>
+      <!-- /#sidebar -->
+      <!-- tab btn -->
+      <div class="tab-wrapper tab-btn w-100 h-48px bg-grey2 top-0">
+        <div
+          class="nav nav-pills d-flex flex-nowrap overflow-auto h-100"
+          id="pills-tab"
+          role="tablist"
+        >
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg active"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              >帳號清單</a
+            >
+          </div>
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-profile"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              >註冊URL清單</a
+            >
+          </div>
+          <div class="nav-item">
+            <a
+              class="nav-link content-tab lh-lg"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-contact"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              >權限設定</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- /#tab btn-->
+      <!-- content-wrapper -->
+      <div class="content-wrapper overflow-hidden">
+        <!-- tab content -->
+        <div class="tab-content cal-mt">
+          <!-- 帳號清單 tab-->
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" tabindex="0">
+            <!-- modify-control 帳號清單 狀態控制列-->
+            <div class="modify-control d-flex flex-row bg-grey4 p-2">
+              <div class="tx-rem15 me-auto ms-2">帳號清單</div>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Delete.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Save.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+              <button
+                type="button"
+                class="btn no-border bg-none edit-ic"
+                data-bs-toggle="modal"
+                data-bs-target="#accountModal"
+              >
+                <img src="./img/Icon_New.svg" class="mx-auto w-18px" />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body 桌次設定 datatable1-->
+            <div class="content-body">
+              <div class="container-fluid">
+                <!-- datatable -->
+                <table id="example2" class="table table-hover nowrap">
+                  <thead>
+                    <tr>
+                      <th>使用者名稱</th>
+                      <th>line/google 名稱</th>
+                      <th>所屬權限群組</th>
+                      <th>綁訂日期</th>
+                      <th>狀態</th>
+                      <th>最後修改日期</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Jack</td>
+                      <td>Jack Lin</td>
+                      <td>經理</td>
+                      <td>2022/07/06 10:52:46</td>
+                      <td>啟用</td>
+                      <td>2022/07/06 10:52:50</td>
+                    </tr>
+                    <tr>
+                      <td>Eric</td>
+                      <td>Eric Lin</td>
+                      <td>經理</td>
+                      <td>2022/07/06 10:52:46</td>
+                      <td>啟用</td>
+                      <td>2022/07/06 10:52:50</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /#datatable -->
+                <!-- footer -->
+                <div class="modify-control d-flex flex-row bg-grey4 p-2">
+                  <div class="tx-rem11 lh-lg ms-2">剩餘可建立的員工數量 85</div>
+                </div>
+                <!-- footer -->
+              </div>
+            </div>
+            <!-- /#content-body datatable1-->
+          </div>
+          <!-- /#帳號清單 tab-->
+          <!-- 註冊URL清單 tab-->
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" tabindex="0">
+            <!-- modify-control 註冊URL清單 狀態控制列-->
+            <div class="modify-control d-flex flex-row bg-grey4 p-2">
+              <div class="tx-rem15 me-auto ms-2">註冊URL清單</div>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Save.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+              <button
+                type="button"
+                class="btn no-border bg-none edit-ic"
+                data-bs-toggle="modal"
+                data-bs-target="#accountModal"
+              >
+                <img src="./img/Icon_New.svg" class="mx-auto w-18px" />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body 註冊URL清單 datatable2-->
+            <div class="content-body mb-5">
+              <div class="container-fluid">
+                <!-- datatable -->
+                <table id="example3" class="table table-hover nowrap">
+                  <thead>
+                    <tr>
+                      <th>使用者名稱</th>
+                      <th>所屬權限群組</th>
+                      <th>綁訂日期</th>
+                      <th>註冊連結</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="lh-lg">
+                      <td>Eric</td>
+                      <td>經理</td>
+                      <td>2022/07/06 10:52:46</td>
+                      <td>
+                        <label class="btn btn-green2 color-black">
+                          <input class="d-none" type="submit" />連結
+                        </label>
+                        <label class="btn btn-green2 color-black">
+                          <input class="d-none" type="submit" />Line 連結
+                        </label>
+                      </td>
+                    </tr>
+                    <tr class="lh-lg">
+                      <td>John</td>
+                      <td>工讀生</td>
+                      <td>2022/07/06 10:52:46</td>
+                      <td>
+                        <label class="btn btn-green2 color-black">
+                          <input class="d-none" type="submit" />連結
+                        </label>
+                        <label class="btn btn-green2 color-black">
+                          <input class="d-none" type="submit" />Line 連結
+                        </label>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /#datatable -->
+              </div>
+            </div>
+            <!-- /#content-body datatable2-->
+          </div>
+          <!-- /#註冊URL清單 tab -->
+          <!-- 權限設定 tab-->
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" tabindex="0">
+            <!-- modify-control 權限設定 狀態控制列-->
+            <div class="modify-control d-flex flex-row bg-grey4 p-2">
+              <div class="tx-rem15 me-auto ms-2">權限設定</div>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Save.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img src="./img/Icon_Edit.svg" class="mx-auto w-18px" />
+              </button>
+              <button type="button" class="btn no-border bg-none edit-ic">
+                <img
+                  src="./img/Icon_New.svg"
+                  class="mx-auto w-18px"
+                  data-bs-toggle="modal"
+                  data-bs-target="#permissionModal"
+                />
+              </button>
+            </div>
+            <!-- /#modify-control -->
+            <!-- content-body 權限設定 datatable3-->
+            <div class="content-body">
+              <div class="container-fluid">
+                <!-- datatable -->
+                <table id="example4" class="table table-hover nowrap">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>群組名稱</th>
+                      <th>建立日期</th>
+                      <th>狀態</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>餐廳管理者</td>
+                      <td>2022/07/06 10:52:46</td>
+                      <td>啟用</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>經理</td>
+                      <td>2022/07/06 10:52:46</td>
+                      <td>啟用</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- /#datatable -->
+              </div>
+            </div>
+            <!-- /#content-body datatable3-->
+          </div>
+          <!-- /#權限設定 tab -->
+        </div>
+        <!-- /#tab content -->
+      </div>
+      <!-- /#content-wrapper -->
+    </div>
+
+    <!-- ------------------------------以下為modal----------------------------------- -->
+    <!-- 新增/修改帳號modal -->
+    <div
+      class="modal fade"
+      id="accountModal"
+      tabindex="-1"
+      aria-labelledby="accountModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增/修改帳號</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="statusCheckChecked"
+                      checked
+                    />
+                    <label class="form-check-label" for="statusCheckChecked">啟用狀態</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">使用者名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">所屬權限群組</label>
+                <div class="col ps-0">
+                  <select class="form-select" required="">
+                    <option value="" selected="" disabled="" hidden="">請選擇權限群組</option>
+                    <option value="2">經理</option>
+                    <option value="3">工讀生</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">儲存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#新增/修改帳號modal -->
+    <!-- 新增/修改權限modal -->
+    <div
+      class="modal fade"
+      id="permissionModal"
+      tabindex="-1"
+      aria-labelledby="permissionModallLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">新增/修改權限</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      value=""
+                      id="statusCheckChecked"
+                      checked
+                    />
+                    <label class="form-check-label" for="statusCheckChecked">啟用狀態</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label class="col-2 col-md-auto col-form-label">群組名稱</label>
+                <div class="col ps-0">
+                  <input type="text" class="form-control" placeholder="請輸入群組名稱" />
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check1" checked />
+                    <label class="form-check-label" for="check1">允許進入桌次設定</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check2" checked />
+                    <label class="form-check-label" for="check2">允許進入餐期設定</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check3" checked />
+                    <label class="form-check-label" for="check3">允許進入營業日設定</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check4" checked />
+                    <label class="form-check-label" for="check4">允許進入訂位規則</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check5" checked />
+                    <label class="form-check-label" for="check5">允許進入客戶版面設定</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check6" checked />
+                    <label class="form-check-label" for="check6">允許進入權限管理</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check7" checked />
+                    <label class="form-check-label" for="check7">允許使用保留桌</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="check8" checked />
+                    <label class="form-check-label" for="check8">允許編輯顧客資訊</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                  取消
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white">儲存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#新增/修改餐期modal -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
+    <!-- jQuery -->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!-- jQuery UI -->
+    <script src="node_modules/jquery-ui-dist/jquery-ui.js"></script>
+    <!-- mobile touch -->
+    <script src="component/jquery-ui-touch-punch-master/jquery.ui.touch-punch.js"></script>
+    <!-- Bootstrap  -->
+    <script src="node_modules/@popperjs/core/dist/umd/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables & Plugins -->
+    <script src="node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="node_modules/datatables.net-responsive-bs5/js/responsive.bootstrap5.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="node_modules/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="node_modules/datatables.net-select/js/dataTables.select.min.js"></script>
+    <script src="node_modules/datatables.net-select-bs5/js/select.bootstrap5.min.js"></script>
+
+    <!-- mobile touch can be drag 行動裝置拖拉支援元件-->
+    <script>
+      // $('#calendar').draggable();
+    </script>
+
+    <!-- DataTables Page specific script 桌次選擇datatable-->
+    <script type="text/javascript">
+      $(function () {
+        $('#example2').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+          fixedHeader: true, //固定表頭
+          scrollY: '200px', //table高度設置，使其可scroll
+          scrollCollapse: true,
+        });
+        $('#example3').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+          fixedHeader: true, //固定表頭
+          scrollY: '30vh', //table高度設置，使其可scroll
+          scrollCollapse: true,
+        });
+        $('#example4').DataTable({
+          language: {
+            sProcessing: '處理中...',
+            sLengthMenu: '顯示 _MENU_ 項結果',
+            sZeroRecords: '沒有匹配結果',
+            sInfo: '顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項',
+            sInfoEmpty: '顯示第 0 至 0 項結果，共 0 項',
+            sInfoFiltered: '(由 _MAX_ 項結果過濾)',
+            sInfoPostFix: '',
+            sSearch: '搜索:',
+            sUrl: '',
+            sEmptyTable: '表中數據為空',
+            sLoadingRecords: '載入中...',
+            sInfoThousands: ',',
+            oPaginate: {
+              sFirst: '首頁',
+              sPrevious: '<',
+              sNext: '>',
+              sLast: '末頁',
+            },
+            oAria: {
+              sSortAscending: ': 以升序排列此列',
+              sSortDescending: ': 以降序排列此列',
+            },
+          },
+          paging: false,
+          lengthChange: false,
+          searching: false,
+          ordering: false,
+          info: false,
+          autoWidth: false,
+          responsive: false,
+          scrollX: false,
+          select: true,
+          fixedHeader: true, //固定表頭
+          scrollY: '80vh', //table高度設置，使其可scroll
+          scrollCollapse: true,
+        });
+        //table至於bootstrap的tab裡(toggle類型為pill)，需刷新datatable產生的表格寬度，否則表頭寬度會無法對齊
+        $('a[data-bs-toggle="pill"]').on('shown.bs.tab', function (e) {
+          $.fn.dataTable.tables({ visible: true, api: true }).columns.adjust();
+        });
+      });
+    </script>
+  </body>
+</html>
