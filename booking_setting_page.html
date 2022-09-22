@@ -17,6 +17,8 @@
       rel="stylesheet"
       type="text/css"
     />
+    <!-- Driver.js Css -->
+    <link rel="stylesheet" href="component/driver.js-master/dist/driver.min.css" />
     <!-- google noto TC font -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
@@ -79,7 +81,7 @@
               >訂位規則</a
             >
           </div>
-          <div class="nav-item">
+          <div class="nav-item" id="twoStep">
             <a
               class="nav-link content-tab lh-lg"
               data-bs-toggle="pill"
@@ -307,7 +309,15 @@
               <button type="button" class="btn btn-outline-secondary me-1 color-grey1">
                 修改取消
               </button>
-              <button type="button" class="btn btn-outline-secondary me-1 color-main">儲存</button>
+              <button
+                type="button"
+                class="btn btn-outline-secondary me-1 color-main"
+                id="saveStep"
+                data-bs-toggle="modal"
+                data-bs-target="#saveModal"
+              >
+                儲存
+              </button>
               <button type="button" class="btn btn-outline-secondary me-1 color-grey1">
                 網頁瀏覽
               </button>
@@ -327,10 +337,15 @@
             <!-- content-body 訂位規則內容-->
             <div class="content-body">
               <div class="container-fluid pt-2">
-                <div class="row mb-3">
+                <div class="row mb-3" id="threeStep">
                   <label class="col-2 col-md-auto col-form-label">*餐廳名稱</label>
                   <div class="col-auto ps-0">
-                    <input type="text" class="form-control color-main" value="我是餐廳名稱" />
+                    <input
+                      type="text"
+                      class="form-control color-main"
+                      value=""
+                      placeholder="餐廳名稱"
+                    />
                   </div>
                 </div>
                 <div class="row mb-3 d-flex align-items-sm-end justify-content-sm-between">
@@ -379,13 +394,13 @@
                     <input type="text" class="form-control" placeholder="請輸入網址" />
                   </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-3" id="fourStep">
                   <label class="col-2 col-md-auto col-form-label">地址</label>
                   <div class="col-8 ps-0">
                     <input type="text" class="form-control" placeholder="請輸入地址" />
                   </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row mb-3" id="fiveStep">
                   <div class="row">
                     <label class="col-2 col-md-auto col-form-label">營業時間</label>
                     <div class="col-2 ps-0">
@@ -638,7 +653,342 @@
       </div>
     </div>
     <!-- /#網頁QRcodemodal -->
-
+    <!-- 儲存完成modal -->
+    <div
+      class="modal fade"
+      id="saveModal"
+      tabindex="-1"
+      aria-labelledby="saveModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">儲存</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <h5>儲存成功</h5>
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal1-1"
+                >
+                  完成
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#儲存完成modal -->
+    <!-- 教學modal1 -->
+    <div
+      class="modal fade"
+      id="teachModal1-1"
+      tabindex="-1"
+      aria-labelledby="teachModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">介紹主要頁面功能</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/introduce1-1.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal1-2"
+                >
+                  下一步
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#教學modal1 -->
+    <!-- 教學modal1-2 -->
+    <div
+      class="modal fade"
+      id="teachModal1-2"
+      tabindex="-1"
+      aria-labelledby="teachModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">介紹主要頁面功能</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/introduce1-2.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal1-1"
+                >
+                  上一步
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal2"
+                >
+                  下一步
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#教學modal1-2 -->
+    <!-- 教學modal2 -->
+    <div
+      class="modal fade"
+      id="teachModal2"
+      tabindex="-1"
+      aria-labelledby="teachModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">介紹主要頁面功能</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/introduce2.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal1-2"
+                >
+                  上一步
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal3"
+                >
+                  下一步
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#教學modal2 -->
+    <!-- 教學modal3 -->
+    <div
+      class="modal fade"
+      id="teachModal3"
+      tabindex="-1"
+      aria-labelledby="teachModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">介紹主要頁面功能</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/introduce3.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal2"
+                >
+                  上一步
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal4"
+                >
+                  下一步
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#教學modal3 -->
+    <!-- 教學modal4 -->
+    <div
+      class="modal fade"
+      id="teachModal4"
+      tabindex="-1"
+      aria-labelledby="teachModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">介紹主要頁面功能</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/introduce4.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal3"
+                >
+                  上一步
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-primary color-white"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal5"
+                >
+                  下一步
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#教學modal4 -->
+    <!-- 教學modal5 -->
+    <div
+      class="modal fade"
+      id="teachModal5"
+      tabindex="-1"
+      aria-labelledby="teachModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">介紹主要頁面功能</h5>
+          </div>
+          <div class="modal-body">
+            <!-- form 內容-->
+            <div class="container-fluid p-3">
+              <div class="d-flex justify-content-center">
+                <img src="img/introduce5.png" class="img-fluid mx-auto d-block h-100" />
+              </div>
+            </div>
+            <!-- /#form -->
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <div class="row w-100">
+              <div class="d-grid gap-2 col">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#teachModal4"
+                >
+                  上一步
+                </button>
+              </div>
+              <div class="d-grid gap-2 col">
+                <button type="button" class="btn btn-primary color-white" data-bs-dismiss="modal">
+                  完成
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#教學modal5 -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap 5.2 JS -->
     <!-- jQuery -->
@@ -650,5 +1000,69 @@
     <script src="component/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- tag input 喜好設定input https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/ -->
     <script src="component/Bootstrap-4-Tag-Input-Plugin-jQuery/tagsinput.js"></script>
+    <!-- Driver.js-->
+    <script src="component/driver.js-master/dist/driver.min.js"></script>
+    <script>
+      function theDriver() {
+        const driver = new Driver({
+          prevBtnText: '上一步',
+          nextBtnText: '下一步',
+          doneBtnText: '完成',
+          closeBtnText: '關閉',
+          allowClose: false,
+          //showButtons: false,
+          animate: true,
+          opacity: 0.75,
+        });
+
+        const steps = [
+          {
+            element: '#twoStep',
+            popover: {
+              title: '<em>準備作基本資料設定</em>',
+              description: '進入<strong>訂位網頁設定分頁</strong>',
+            },
+            onNext: (ele) => {
+              $('a[data-bs-target="#pills-profile"]').tab('show');
+            },
+          },
+          {
+            element: '#threeStep',
+            popover: {
+              title: '<em>基本資料設定</em>',
+              description: '填寫<strong>店家名稱</strong>',
+            },
+          },
+          {
+            element: '#fourStep',
+            popover: {
+              title: '<em>基本資料設定</em>',
+              description: '填寫<strong>餐廳地址</strong>',
+            },
+          },
+          {
+            element: '#fiveStep',
+            popover: {
+              title: '<em>基本資料設定</em>',
+              description: '填寫<strong>營業時間</strong>',
+            },
+          },
+          {
+            element: '#saveStep',
+            popover: {
+              title: '<em>完成設定</em>',
+              description: '請按<strong>儲存</strong>',
+              position: 'left',
+            },
+          },
+        ];
+        driver.defineSteps(steps);
+        driver.start();
+      }
+
+      $(document).ready(function () {
+        theDriver();
+      });
+    </script>
   </body>
 </html>

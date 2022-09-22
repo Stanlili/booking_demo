@@ -362,6 +362,23 @@ border-bottom: 1px solid !important;
   z-index: 999;
 }
 
+#firstStep{
+  z-index: 999999999 !important;
+}
+
+div#driver-highlighted-element-stage, div#driver-page-overlay {
+  background: transparent !important;
+  outline: 5000px solid rgba(0, 0, 0, .75);
+}
+
+.driver-close-btn,
+.driver-prev-btn,
+.driver-done-btn{
+  visibility: hidden;
+  display: none;
+}
+
+
 .content-wrapper{
   position: relative;
   margin-left: 6.4rem;
@@ -420,7 +437,8 @@ border-bottom: 1px solid !important;
 .tab-wrapper{
   position: fixed;
   margin-left: 6.4rem;
-  z-index: 9999;
+  // z-index: 9999;
+  z-index: 1055;
 }
 
 .upload-logo{
