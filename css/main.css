@@ -636,6 +636,14 @@ table.dataTable > tbody > tr.selected > * {
   width: 126px;
 }
 
+/*tutorial*/
+.modal-footer-style {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+}
+
 /* collapse icon change */
 [aria-expanded="false"] .submenu-icon-close {
   display: inline;
@@ -654,17 +662,44 @@ table.dataTable > tbody > tr.selected > * {
 }
 
 /*RWD*/
+@media screen and (max-width: 1024px) {
+  .tutorial-rwd-sm {
+    display: block;
+  }
+  .tutorial-rwd-md {
+    display: none;
+  }
+  .tutorial-rwd-lg {
+    display: none;
+  }
+}
+
 @media screen and (min-width: 1025px) and (max-width: 1180px) {
   .cus-info-form-scroll {
     height: 569px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
+  .tutorial-rwd-sm {
+    display: none;
+  }
+  .tutorial-rwd-md {
+    display: block;
+  }
+  .tutorial-rwd-lg {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 1181px) {
-  .calendar-h {
-    height: 700px;
+  .tutorial-rwd-sm {
+    display: none;
+  }
+  .tutorial-rwd-md {
+    display: none;
+  }
+  .tutorial-rwd-lg {
+    display: block;
   }
 }
 /*# sourceMappingURL=main.css.map */
