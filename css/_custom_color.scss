@@ -17,6 +17,8 @@ $grey5: #EBEBEB;
 
 $line_color:#06c755;
 //https://codepen.io/sosuke/pen/Pjoqqp CSS filter generator to convert from black to target hex color
+
+$fill_main: invert(56%) sepia(68%) saturate(6033%) hue-rotate(345deg) brightness(94%) contrast(86%);
 $fill_secondary:invert(91%) sepia(45%) saturate(7456%) hue-rotate(307deg) brightness(100%) contrast(101%);
 $fill_white:invert(100%) sepia(0%) saturate(7500%) hue-rotate(2deg) brightness(103%) contrast(101%);
 $fill_grey2:invert(40%) sepia(0%) saturate(992%) hue-rotate(151deg) brightness(95%) contrast(86%);

@@ -184,9 +184,22 @@ body {
 }
 
 /*svg bg color*/
+.edit-ic:disabled {
+  pointer-events: none;
+  cursor: default;
+  -webkit-filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(2deg) brightness(103%) contrast(101%) !important;
+          filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(2deg) brightness(103%) contrast(101%) !important;
+}
+
 .ic-secondary-color a,
 .ic-white-color a {
   color: #000 !important;
+}
+
+.ic-main-color {
+  -webkit-filter: invert(56%) sepia(68%) saturate(6033%) hue-rotate(345deg) brightness(94%) contrast(86%);
+          filter: invert(56%) sepia(68%) saturate(6033%) hue-rotate(345deg) brightness(94%) contrast(86%);
+  color: #E15231;
 }
 
 .ic-secondary-color {

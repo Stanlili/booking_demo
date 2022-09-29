@@ -164,10 +164,21 @@ border-bottom: 1px solid !important;
 }
 
 /*svg bg color*/
+.edit-ic:disabled {
+  pointer-events: none;
+  cursor: default;
+  filter: $fill_white !important;
+}
+
 .ic-secondary-color a,
 .ic-white-color a {
   color: #000 !important;
 }
+
+.ic-main-color{
+  filter: $fill_main;
+  color: $main_color;
+} 
 
 .ic-secondary-color{
   filter: $fill_secondary;
